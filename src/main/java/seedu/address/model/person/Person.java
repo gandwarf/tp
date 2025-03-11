@@ -71,7 +71,9 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getAddress().equals(getAddress());
     }
 
     /**
@@ -91,8 +93,8 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
+                && phone.equals(otherPerson.phone)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags);
     }
