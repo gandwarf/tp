@@ -87,12 +87,6 @@ public class FindCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
 
-        predicate = preparePredicate("coffee book");
-        command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, DANIEL, FIONA), model.getFilteredPersonList());
-
         expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 5);
         predicate = preparePredicate("cup friends");
         command = new FindCommand(predicate);

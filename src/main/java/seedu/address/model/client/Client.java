@@ -2,7 +2,11 @@ package seedu.address.model.client;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -27,17 +31,35 @@ public class Client {
     /**
      * Every field must be present and not null.
      */
-    public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Optional<Frequency> frequency, Optional<ProductPreference> productPreference) {
+    public Client(Name name, Phone phone, Email email, Address address,
+                  Set<Tag> tags, Optional<Frequency> frequency, Optional<ProductPreference> productPreference) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.frequency = frequency;
-        this.productPreference = productPreference;
+        if (frequency.isEmpty() && productPreference.isPresent()) {
+            this.frequency = Optional.of(new Frequency(1));
+            this.productPreference = productPreference;
+        } else {
+            this.frequency = frequency;
+            this.productPreference = productPreference;
+        }
     }
 
+    /**
+     * Constructs a {@code Client} with the specified mandatory fields:
+     * name, phone, email, address, and tags. The {@code frequency} and
+     * {@code productPreference} fields are initialized as empty.
+     *
+     * @param name    The client's name.
+     * @param phone   The client's phone number.
+     * @param email   The client's email address.
+     * @param address The client's mailing address.
+     * @param tags    A set of tags associated with the client.
+     * @throws NullPointerException If any of the provided parameters are null.
+     */
     public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;

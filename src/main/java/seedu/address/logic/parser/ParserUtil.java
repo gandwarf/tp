@@ -10,7 +10,12 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.client.*;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Frequency;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
+import seedu.address.model.client.ProductPreference;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,14 +125,39 @@ public class ParserUtil {
         return tagSet;
     }
 
-    public static Optional<ProductPreference> parseProductPreference(Optional<String> productPreference) throws ParseException {
+    /**
+     * Parses an {@code Optional<String>} into an {@code Optional<ProductPreference>}.
+     * <p>
+     * Leading and trailing whitespaces will be trimmed. If the input value is empty,
+     * this method returns {@code Optional.empty()}.
+     *
+     * @param productPreference The optional string that may contain a product preference.
+     * @return An Optional containing a {@code ProductPreference} if the string is present,
+     *         or {@code Optional.empty()} if not.
+     * @throws ParseException If the string is invalid and cannot form a valid ProductPreference.
+     */
+    public static Optional<ProductPreference> parseProductPreference(
+            Optional<String> productPreference) throws ParseException {
         requireNonNull(productPreference);
         return productPreference
                 .map(String::trim)
                 .map(ProductPreference::new);
     }
 
-    public static Optional<Frequency> parseFrequency(Optional<String> frequency) throws ParseException {
+    /**
+     * Parses an {@code Optional<String>} into an {@code Optional<Frequency>}.
+     * <p>
+     * Leading and trailing whitespaces will be trimmed. If the input value is empty,
+     * this method returns {@code Optional.empty()}. Otherwise, it attempts to parse
+     * the trimmed string as an integer, then wraps it in a {@code Frequency} object.
+     *
+     * @param frequency The optional string that may represent a frequency.
+     * @return An Optional containing a {@code Frequency} if the string is present and valid,
+     *         or {@code Optional.empty()} if not.
+     * @throws ParseException If the string cannot be parsed into an integer or otherwise invalid.
+     */
+    public static Optional<Frequency> parseFrequency(
+            Optional<String> frequency) throws ParseException {
         requireNonNull(frequency);
         return frequency
                 .map(String::trim)
