@@ -4,15 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.client.Address;
-import seedu.address.model.client.Email;
-import seedu.address.model.client.Name;
-import seedu.address.model.client.Phone;
+import seedu.address.model.client.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +118,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static Optional<ProductPreference> parseProductPreference(Optional<String> productPreference) throws ParseException {
+        requireNonNull(productPreference);
+        return productPreference
+                .map(String::trim)
+                .map(ProductPreference::new);
+    }
+
+    public static Optional<Frequency> parseFrequency(Optional<String> frequency) throws ParseException {
+        requireNonNull(frequency);
+        return frequency
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .map(Frequency::new);
     }
 }

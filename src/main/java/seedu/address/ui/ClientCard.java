@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.client.Client;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class ClientCard extends UiPart<Region> {
 
@@ -57,7 +57,11 @@ public class ClientCard extends UiPart<Region> {
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        productPreferenceWithFrequency.getChildren()
-                .add(new Label(client.getProductPreference().toString() + ": " + client.getFrequency().frequency));
+        if (client.getProductPreference().isPresent() && client.getFrequency().isPresent()) {
+            String preferenceText = client.getProductPreference().map(Object::toString).get();
+            String frequencyText = client.getFrequency().map(f -> Integer.toString(f.frequency)).get();
+
+            productPreferenceWithFrequency.getChildren().add(new Label(preferenceText + ": " + frequencyText));
+        }
     }
 }

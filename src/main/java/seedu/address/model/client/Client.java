@@ -2,10 +2,7 @@ package seedu.address.model.client;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -24,12 +21,23 @@ public class Client {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private Frequency frequency;
-    private ProductPreference productPreference;
+    private Optional<Frequency> frequency;
+    private Optional<ProductPreference> productPreference;
 
     /**
      * Every field must be present and not null.
      */
+    public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Optional<Frequency> frequency, Optional<ProductPreference> productPreference) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.frequency = frequency;
+        this.productPreference = productPreference;
+    }
+
     public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
@@ -37,16 +45,8 @@ public class Client {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-    }
-
-    /**
-     * Accepts a client with frequency and product preference
-     */
-    public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  Frequency frequency, ProductPreference productPreference) {
-        this(name, phone, email, address, tags);
-        this.frequency = frequency;
-        this.productPreference = productPreference;
+        this.frequency = Optional.empty();
+        this.productPreference = Optional.empty();
     }
 
 
@@ -66,11 +66,11 @@ public class Client {
         return address;
     }
 
-    public Frequency getFrequency() {
+    public Optional<Frequency> getFrequency() {
         return frequency;
     }
 
-    public ProductPreference getProductPreference() {
+    public Optional<ProductPreference> getProductPreference() {
         return productPreference;
     }
 

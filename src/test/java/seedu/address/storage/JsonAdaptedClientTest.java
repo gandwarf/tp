@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -31,8 +32,8 @@ public class JsonAdaptedClientTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final String VALID_PRODUCT_PREFERENCE = BENSON.getProductPreference().toString();
-    private static final int VALID_FREQUENCY = BENSON.getFrequency().frequency;
+    private static final String VALID_PRODUCT_PREFERENCE = BENSON.getProductPreference().map(x -> x.productPreference).orElse("");
+    private static final Integer VALID_FREQUENCY = BENSON.getFrequency().map(x -> x.frequency).orElse(0);
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {

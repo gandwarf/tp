@@ -1,9 +1,6 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -32,7 +29,7 @@ class JsonAdaptedClient {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String productPreference;
-    private final int frequency;
+    private final Integer frequency;
 
     /**
      * Constructs a {@code JsonAdaptedClient} with the given person details.
@@ -42,7 +39,7 @@ class JsonAdaptedClient {
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("productPreference") String productPreference,
-                             @JsonProperty("frequency") int frequency) {
+                             @JsonProperty("frequency") Integer frequency) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -65,8 +62,8 @@ class JsonAdaptedClient {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        productPreference = source.getProductPreference().toString();
-        frequency = source.getFrequency().frequency;
+        productPreference = source.getProductPreference().map(ProductPreference::toString).orElse("");
+        frequency = source.getFrequency().map(x -> x.frequency).orElse(0);
     }
 
     /**
@@ -118,9 +115,9 @@ class JsonAdaptedClient {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ProductPreference.class.getSimpleName()));
         }
-        final ProductPreference modelProductPreference = new ProductPreference(productPreference);
+        final Optional<ProductPreference> modelProductPreference = Optional.of(new ProductPreference(productPreference));
 
-        final Frequency modelFrequency = new Frequency(frequency);
+        final Optional<Frequency> modelFrequency = Optional.of(new Frequency(frequency));
 
         return new Client(modelName, modelPhone, modelEmail, modelAddress, modelTags,
                 modelFrequency, modelProductPreference);
