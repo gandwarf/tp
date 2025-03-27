@@ -4,7 +4,9 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Description;
 import seedu.address.model.client.ProductPreference;
 
 /**
@@ -19,6 +21,9 @@ public class ClientDetailPanel extends UiPart<Region> {
     @FXML private Label address;
     @FXML private Label frequency;
     @FXML private Label productPreference;
+    @FXML private VBox productPreferenceSection;
+    @FXML private Label description;
+    @FXML private VBox descriptionSection;
 
     /**
      * Constructor that takes in a client in order to display target's details
@@ -34,6 +39,16 @@ public class ClientDetailPanel extends UiPart<Region> {
             productPreference.setText("Preferred Products: " + client.getProductPreference()
                     .map(ProductPreference::toString).orElse(""));
             frequency.setText("Purchase Frequency: " + client.getProductPreference().get().getFrequency());
+        } else {
+            productPreferenceSection.setVisible(false);
+            productPreferenceSection.setManaged(false);
+        }
+        if (client.getDescription().isPresent()) {
+            description.setText("Description: " + client.getDescription()
+                    .map(Description::toString).orElse(""));
+        } else {
+            descriptionSection.setVisible(false);
+            descriptionSection.setManaged(false);
         }
     }
 }

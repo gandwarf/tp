@@ -91,4 +91,9 @@ public interface Model {
      * @throws NullPointerException if {@code sorter} is null.
      */
     void sortFilteredClientList(Comparator<Client> sorter);
+
+
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<Client> getFilteredClientList();
+
 }

@@ -11,6 +11,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Frequency;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Priority;
 import seedu.address.model.client.ProductPreference;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -27,6 +28,7 @@ public class ClientBuilder {
     public static final String DEFAULT_PRODUCT_PREFERENCE = "Shampoo";
     public static final int DEFAULT_TOTAL_PURCHASE = 0;
     public static final String DEFAULT_DESCRIPTION = "Likes to buy shampoo";
+    public static final Priority DEFAULT_PRIORITY = Priority.STANDARD;
 
     private Name name;
     private Phone phone;
@@ -36,6 +38,7 @@ public class ClientBuilder {
     private Optional<ProductPreference> productPreference;
     private int totalPurchase;
     private Optional<Description> description;
+    private Optional<Priority> priority;
 
     /**
      * Creates a {@code ClientBuilder} with the default details.
@@ -50,6 +53,7 @@ public class ClientBuilder {
         productPreference = Optional
                 .of(new ProductPreference(DEFAULT_PRODUCT_PREFERENCE, new Frequency(DEFAULT_TOTAL_PURCHASE)));
         description = Optional.of(new Description(DEFAULT_DESCRIPTION));
+        priority = Optional.of(DEFAULT_PRIORITY);
     }
 
     /**
@@ -63,6 +67,8 @@ public class ClientBuilder {
         tags = new HashSet<>(clientToCopy.getTags());
         productPreference = clientToCopy.getProductPreference();
         totalPurchase = clientToCopy.getTotalPurchase();
+        description = clientToCopy.getDescription();
+        priority = clientToCopy.getPriority();
     }
 
     /**
@@ -148,8 +154,25 @@ public class ClientBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Priority} of the {@code Client} that we are building to be empty.
+     */
+    public ClientBuilder withEmptyPriority() {
+        this.priority = Optional.empty();
+        return this;
+    }
+
+    /**
+     * Sets the {@code Priority} of the {@code Client} that we are building.
+     */
+    public ClientBuilder withPriority(Priority priority) {
+        this.priority = Optional.of(priority);
+        return this;
+    }
+
+
     public Client build() {
-        return new Client(name, phone, email, address, tags, productPreference, description);
+        return new Client(name, phone, email, address, tags, productPreference, description, priority);
     }
 
 }

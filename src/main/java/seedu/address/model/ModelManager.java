@@ -139,6 +139,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Client> getFilteredClientList() {
+        return filteredClients;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

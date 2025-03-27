@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -7,9 +8,12 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Description;
 import seedu.address.model.client.Email;
+import seedu.address.model.client.Frequency;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.ProductPreference;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -78,6 +82,24 @@ public class EditClientDescriptorBuilder {
     public EditClientDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code description} into an {@code Optional<Tag>} and set it to the {@code EditClientDescriptor}
+     * that we are building.
+     */
+    public EditClientDescriptorBuilder withDescription(String description) {
+        Optional<Description> descriptionOptional = Optional.of(new Description(description));
+        descriptor.setDescription(descriptionOptional);
+        return this;
+    }
+
+    /**
+     * Sets the {@code ProductPreference} of the {@code EditClientDescriptor} that we are building.
+     */
+    public EditClientDescriptorBuilder withProductPreference(String productPreference) {
+        descriptor.setProductPreference(Optional.of(new ProductPreference(productPreference, new Frequency(0))));
         return this;
     }
 

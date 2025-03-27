@@ -98,7 +98,6 @@ public class TypicalClients {
             .withAddress("chicago ave")
             .withTotalPurchase(2)
             .withProductPreference("coffee")
-            .withDescription("Potential client for coffee.")
             .build();
 
     // Manually added - Client's details found in {@code CommandTestUtil}

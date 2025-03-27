@@ -6,6 +6,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Description;
+import seedu.address.model.client.Priority;
+import seedu.address.model.client.ProductPreference;
 
 /**
  * Container for user visible messages.
@@ -46,6 +49,22 @@ public class Messages {
                 .append(client.getAddress())
                 .append("; Tags: ");
         client.getTags().forEach(builder::append);
+        if (client.getProductPreference().isPresent()) {
+            builder.append("; Product Preference: ")
+                    .append(client.getProductPreference().map(ProductPreference::toString).get());
+        }
+
+        if (client.getDescription().isPresent()) {
+            builder.append("; Description: ")
+                    .append(client.getDescription().map(Description::toString).get());
+        }
+
+        if (client.getPriority().isPresent()) {
+            builder.append("; Priority: ")
+                    .append(client.getPriority().map(Priority::toString).orElse(""));
+        }
+
+
         return builder.toString();
     }
 

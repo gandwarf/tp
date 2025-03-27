@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Optional;
@@ -21,6 +22,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Frequency;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Priority;
 import seedu.address.model.client.ProductPreference;
 import seedu.address.model.tag.Tag;
 
@@ -37,7 +39,8 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_PREFERENCE, PREFIX_FREQUENCY);
+                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_PREFERENCE,
+                        PREFIX_FREQUENCY, PREFIX_PRIORITY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -53,8 +56,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Optional<Frequency> frequency = ParserUtil.parseFrequency(argMultimap.getValue(PREFIX_FREQUENCY));
         Optional<ProductPreference> productPreference = ParserUtil
                 .parseProductPreference(argMultimap.getValue(PREFIX_PREFERENCE), frequency);
+        Optional<Priority> priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY));
 
-        Client client = new Client(name, phone, email, address, tagList, productPreference, Optional.ofNullable(null));
+        //TODO: CHANGE THIS TO ACCEPT PRIORITY
+        Client client = new Client(name, phone, email, address, tagList, productPreference, Optional.ofNullable(null),
+                priority);
 
         return new AddCommand(client);
     }

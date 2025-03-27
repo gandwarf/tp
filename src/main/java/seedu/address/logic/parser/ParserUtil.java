@@ -11,10 +11,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Description;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Frequency;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Priority;
 import seedu.address.model.client.ProductPreference;
 import seedu.address.model.tag.Tag;
 
@@ -164,5 +166,55 @@ public class ParserUtil {
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .map(Frequency::new);
+    }
+
+
+
+    /**
+     * Parses an {@code Optional<String>} into an {@code Optional<Description>}.
+     * <p>
+     * Leading and trailing whitespaces will be trimmed. If the input value is empty,
+     * this method returns {@code Optional.empty()}. Otherwise, it attempts to wrap it
+     * in a {@code Description} object.
+     *
+     * @param description The optional string that may represent a description.
+     * @return An Optional containing a {@code Description} if the string is present,
+     *         or {@code Optional.empty()} if not.
+     */
+    public static Optional<Description> parseDescription(
+            Optional<String> description) {
+        requireNonNull(description);
+        return description
+                .map(String::trim)
+                .map(Description::new);
+    }
+
+
+    /**
+     * Parses an {@code Optional<String>} into an {@code Optional<Priority>}.
+     * <p>
+     * Leading and trailing whitespaces will be trimmed. If the input value is empty,
+     * this method returns {@code Optional.empty()}. Otherwise, it attempts to parse
+     * the trimmed string as an integer, then wraps it in a {@code Priority} object.
+     *
+     * @param priority The optional string that may represent a priority.
+     * @return An Optional containing a {@code Priority} if the string is present and valid,
+     *         or {@code Optional.empty()} if not.
+     * @throws ParseException If the string cannot be parsed into an integer or otherwise invalid.
+     */
+    public static Optional<Priority> parsePriority(Optional<String> priority) throws ParseException {
+        requireNonNull(priority);
+
+        if (!priority.isPresent()) {
+            return Optional.empty();
+        }
+
+        int priorityValue = Integer.parseInt(priority.get());
+
+        if (!Priority.isValidIntegerPriority(priorityValue)) {
+            throw new ParseException(Priority.MESSAGE_CONSTRAINTS_INT);
+        }
+
+        return Optional.of(Priority.fromInt(priorityValue));
     }
 }

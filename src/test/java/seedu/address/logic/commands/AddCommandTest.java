@@ -163,6 +163,11 @@ public class AddCommandTest {
         public void sortFilteredClientList(Comparator<Client> comparator) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<Client> getFilteredClientList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

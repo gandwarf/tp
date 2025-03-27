@@ -28,12 +28,14 @@ public class Client {
     private final int totalPurchase;
     private final Optional<ProductPreference> productPreference;
     private final Optional<Description> description;
+    private final Optional<Priority> priority;
 
     /**
      * Every field must be present and not null.
      */
     public Client(Name name, Phone phone, Email email, Address address,
-                  Set<Tag> tags, Optional<ProductPreference> productPreference, Optional<Description> description) {
+                  Set<Tag> tags, Optional<ProductPreference> productPreference, Optional<Description> description,
+                  Optional<Priority> priority) {
         requireAllNonNull(name, phone, email, address, tags, productPreference, description);
         this.name = name;
         this.phone = phone;
@@ -44,6 +46,7 @@ public class Client {
         this.totalPurchase = productPreference
                 .map(x -> x.getFrequency().frequency).orElse(0);
         this.description = description;
+        this.priority = priority;
     }
 
 
@@ -73,6 +76,10 @@ public class Client {
 
     public Optional<Description> getDescription() {
         return description;
+    }
+
+    public Optional<Priority> getPriority() {
+        return priority;
     }
 
     /**
@@ -118,13 +125,15 @@ public class Client {
                 && phone.equals(otherClient.phone)
                 && email.equals(otherClient.email)
                 && address.equals(otherClient.address)
-                && tags.equals(otherClient.tags);
+                && tags.equals(otherClient.tags)
+                && productPreference.equals(otherClient.productPreference)
+                && priority.equals(otherClient.priority);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, productPreference, description, priority);
     }
 
     @Override
@@ -138,6 +147,7 @@ public class Client {
                 .add("productPreference", productPreference.map(ProductPreference::toString).orElse(""))
                 .add("totalPurchase", totalPurchase)
                 .add("description", description.map(Description::toString).orElse(""))
+                .add("priority", priority.map(Priority::toString).orElse(""))
                 .toString();
     }
 

@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -36,7 +37,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_PREFERENCE, PREFIX_FREQUENCY);
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_PREFERENCE, PREFIX_FREQUENCY, PREFIX_PRIORITY);
 
         Index index;
 
@@ -46,7 +47,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_PREFERENCE, PREFIX_FREQUENCY, PREFIX_PRIORITY);
 
         EditClientDescriptor editClientDescriptor = new EditClientDescriptor();
 
@@ -62,14 +64,19 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editClientDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
+        if (argMultimap.getValue(PREFIX_FREQUENCY).isPresent()
+                && !argMultimap.getValue(PREFIX_PREFERENCE).isPresent()) {
+            throw new ParseException(EditCommand.MESSAGE_FREQUENCY_NOT_ALLOWED);
+        }
+
         Optional<Frequency> frequency = ParserUtil.parseFrequency(argMultimap.getValue(PREFIX_FREQUENCY));
         if (argMultimap.getValue(PREFIX_PREFERENCE).isPresent()) {
             editClientDescriptor.setProductPreference(ParserUtil.parseProductPreference(
                     argMultimap.getValue(PREFIX_PREFERENCE), frequency));
         }
-        if (argMultimap.getValue(PREFIX_FREQUENCY).isPresent()
-                && !argMultimap.getValue(PREFIX_PREFERENCE).isPresent()) {
-            throw new ParseException(EditCommand.MESSAGE_FREQUENCY_NOT_ALLOWED);
+
+        if (argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
+            editClientDescriptor.setPriority(ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY)));
         }
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editClientDescriptor::setTags);

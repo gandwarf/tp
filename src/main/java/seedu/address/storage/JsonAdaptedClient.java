@@ -14,10 +14,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Description;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Frequency;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Priority;
 import seedu.address.model.client.ProductPreference;
 import seedu.address.model.tag.Tag;
 
@@ -37,6 +39,10 @@ class JsonAdaptedClient {
     private final String productPreference;
     @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     private final int frequency;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private final String description;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private final String priority;
 
     /**
      * Constructs a {@code JsonAdaptedClient} with the given client details.
@@ -46,7 +52,9 @@ class JsonAdaptedClient {
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("productPreference") String productPreference,
-                             @JsonProperty("frequency") int frequency) {
+                             @JsonProperty("frequency") int frequency,
+                             @JsonProperty("description") String description,
+                             @JsonProperty("priority") String priority) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -56,6 +64,8 @@ class JsonAdaptedClient {
         }
         this.productPreference = productPreference;
         this.frequency = frequency;
+        this.description = description;
+        this.priority = priority;
     }
 
     /**
@@ -75,6 +85,12 @@ class JsonAdaptedClient {
         frequency = source.getProductPreference()
                 .map(preference -> preference.getFrequency().frequency)
                 .orElse(0);
+        description = source.getDescription()
+                .map(Description::toString)
+                .orElse(null);
+        priority = source.getPriority()
+                .map(Priority::toString)
+                .orElse(null);
     }
 
     /**
@@ -122,22 +138,35 @@ class JsonAdaptedClient {
 
         final Set<Tag> modelTags = new HashSet<>(clientTags);
 
+        final Optional<ProductPreference> modelProductPreference;
+
+        final Priority modelPriority = priority == null ? null : Priority.fromString(priority);
+
         if (productPreference == null) {
-            //TODO: Change this to accept Description
-            return new Client(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                    Optional.ofNullable(null), Optional.ofNullable(null));
+            modelProductPreference = Optional.empty();
+        } else {
+
+            if (!Frequency.isValidFrequency(frequency)) {
+                throw new IllegalValueException(Frequency.MESSAGE_CONSTRAINTS);
+            }
+            final Frequency productFrequency = new Frequency(frequency);
+
+            modelProductPreference = Optional.of(new ProductPreference(productPreference, productFrequency));
         }
 
-        if (!Frequency.isValidFrequency(frequency)) {
-            throw new IllegalValueException(Frequency.MESSAGE_CONSTRAINTS);
+        final Optional<Description> modelDescription;
+
+        if (description == null) {
+            modelDescription = Optional.empty();
+        } else {
+            if (!Description.isValidDescription(description)) {
+                throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
+            }
+            modelDescription = Optional.of(new Description(description));
         }
-        final Frequency productFrequency = new Frequency(frequency);
 
-        final ProductPreference modelProductPreference = new ProductPreference(productPreference, productFrequency);
-
-        //TODO: Change this to accept Description
         return new Client(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                Optional.of(modelProductPreference), Optional.ofNullable(null));
+                modelProductPreference, modelDescription, Optional.ofNullable(modelPriority));
     }
 
 }

@@ -41,11 +41,15 @@
                     <Label fx:id="address" styleClass="detail-content" wrapText="true"/>
                 </VBox>
 
-                <VBox spacing="5" styleClass="detail-section">
+                <VBox fx:id="productPreferenceSection" spacing="5" styleClass="detail-section">
                     <Label text="Preferences" styleClass="detail-subheader"/>
                     <Label fx:id="productPreference" styleClass="detail-content" wrapText="true"/>
                     <Label fx:id="frequency" styleClass="detail-content"/>
+                </VBox>
 
+                <VBox fx:id="descriptionSection" spacing="5" styleClass="detail-section">
+                    <Label text="Description" styleClass="detail-subheader"/>
+                    <Label fx:id="description" styleClass="detail-content" wrapText="true"/>
                 </VBox>
             </VBox>
         </content>

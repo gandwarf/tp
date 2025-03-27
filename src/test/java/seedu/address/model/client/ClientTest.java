@@ -94,15 +94,27 @@ public class ClientTest {
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
                 + ", productPreference=" + ALICE.getProductPreference().get()
                 + ", totalPurchase=" + ALICE.getTotalPurchase()
-                + ", description=" + ALICE.getDescription().get() + "}";
+                + ", description=" + ALICE.getDescription().get()
+                + ", priority=" + ALICE.getPriority().get() + "}";
         assertEquals(expected, ALICE.toString());
 
         // Test for client without product preference and description
-        Client client = new ClientBuilder().withEmptyProductPreference().withEmptyDescription().build();
-        expected = Client.class.getCanonicalName() + "{name=" + client.getName() + ", phone=" + client.getPhone()
-                + ", email=" + client.getEmail() + ", address=" + client.getAddress() + ", tags=" + client.getTags()
-                + ", productPreference=" + ", totalPurchase=" + client.getTotalPurchase()
-                + ", description=" + "}";
-        assertEquals(expected, client.toString());
+        Client client1 = new ClientBuilder().withEmptyProductPreference().withEmptyDescription().build();
+        expected = Client.class.getCanonicalName() + "{name=" + client1.getName() + ", phone=" + client1.getPhone()
+                + ", email=" + client1.getEmail() + ", address=" + client1.getAddress() + ", tags=" + client1.getTags()
+                + ", productPreference=" + ", totalPurchase=" + client1.getTotalPurchase()
+                + ", description="
+                + ", priority=" + client1.getPriority().get() + "}";
+        assertEquals(expected, client1.toString());
+
+        // Test for client without Priority level
+        Client client2 = new ClientBuilder().withEmptyPriority().build();
+        expected = Client.class.getCanonicalName() + "{name=" + client2.getName() + ", phone=" + client2.getPhone()
+                + ", email=" + client2.getEmail() + ", address=" + client2.getAddress() + ", tags=" + client2.getTags()
+                + ", productPreference=" + client2.getProductPreference().get()
+                + ", totalPurchase=" + client2.getTotalPurchase()
+                + ", description=" + client2.getDescription().get()
+                + ", priority=" + "}";
+        assertEquals(expected, client2.toString());
     }
 }
