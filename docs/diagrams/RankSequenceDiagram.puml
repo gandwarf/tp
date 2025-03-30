@@ -80,6 +80,9 @@ deactivate CommandResult
 RankCommand --> LogicManager : r
 deactivate RankCommand
 
+RankCommand -[hidden]-> RankCommandParser
+destroy RankCommand
+
 [<--LogicManager
 deactivate LogicManager
 
