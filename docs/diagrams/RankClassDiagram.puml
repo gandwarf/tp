@@ -2,10 +2,11 @@
 'https://plantuml.com/class-diagram
 !include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor MODEL_COLOR
-skinparam classBackgroundColor MODEL_COLOR
+skinparam arrowColor MODEL_COLOR_T4
+skinparam classBackgroundColor RANK_COLOR
 show member
 
+Class Command
 Class RankCommand
 interface "<<Client>>\nComparator" as Comparator
 Class Client {
@@ -13,7 +14,6 @@ Class Client {
 }
 
 Class Name
-
 Class CommandResult
 
 class TotalPurchaseComparator {
@@ -24,6 +24,7 @@ class NameComparator {
 + {static} COMPARATOR_WORD : String = "name"
 }
 
+RankCommand -up-|> Command
 RankCommand ..> CommandResult : > creates
 RankCommand --> "1" Comparator : ranks clients with >
 TotalPurchaseComparator .up.|> Comparator
@@ -33,12 +34,5 @@ TotalPurchaseComparator ..> Client
 NameComparator ..> Client
 
 Client -d-> "1" Name : has >
-
-
-
-
-
-
-
 
 @enduml

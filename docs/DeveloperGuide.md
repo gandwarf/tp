@@ -165,8 +165,9 @@ This section describes some noteworthy details on how certain features are imple
 <puml src="diagrams/RankClassDiagram.puml" width="550" />
 
 The `Rank` command component,
-* holds a client `comparator` that determines the sort order between any two clients using the `compare` method.
-* each `comparator` has a `COMPARATOR_WORD` `String` that is used to parse user input to create the suitable `comparator`.
+* holds a client `Comparator` that determines the sort order between any two clients using the `compare` method.
+* each `Comparator` has a `COMPARATOR_WORD` `String` that is used to parse user input to create the suitable `Comparator`.
+* each `Comparator` also depends on the `Client` which helps to gain access to the required parameters to compare with.
 
 #### Implementation
 
@@ -177,7 +178,7 @@ Given below is an example usage scenario and how the rank mechanism behaves at e
 
 Here's the sequence diagram that shows the flow of the execution for the command `rank name`.
 
-<puml src="diagrams/RankSequenceDiagram.puml" width="550" />
+<puml src="diagrams/RankSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `rank name` Command" />
 
 
 ### \[Proposed\] Data archiving
