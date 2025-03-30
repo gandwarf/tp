@@ -34,6 +34,7 @@
 !define USER_COLOR #000000
 
 !define RANK_COLOR #A29FFF
+!define RANK_COLOR_T1 #000000
 
 skinparam Package {
     BackgroundColor #FFFFFF
