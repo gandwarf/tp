@@ -162,10 +162,22 @@ public class ParserUtil {
     public static Optional<Frequency> parseFrequency(
             Optional<String> frequency) throws ParseException {
         requireNonNull(frequency);
-        return frequency
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .map(Frequency::new);
+        if (!frequency.isPresent()) {
+            return Optional.empty();
+        }
+
+        int freqValue;
+        try {
+            freqValue = Integer.parseInt(frequency.get());
+        } catch (NumberFormatException e) {
+            throw new ParseException(Frequency.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Frequency.isValidFrequency(freqValue)) {
+            throw new ParseException(Frequency.MESSAGE_CONSTRAINTS);
+        }
+
+        return Optional.of(new Frequency(freqValue));
     }
 
 
