@@ -209,7 +209,13 @@ public class ParserUtil {
             return Optional.empty();
         }
 
-        int priorityValue = Integer.parseInt(priority.get());
+        int priorityValue;
+
+        try {
+            priorityValue = Integer.parseInt(priority.get());
+        } catch (NumberFormatException e) {
+            throw new ParseException(Priority.MESSAGE_CONSTRAINTS_INT);
+        }
 
         if (!Priority.isValidIntegerPriority(priorityValue)) {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS_INT);
