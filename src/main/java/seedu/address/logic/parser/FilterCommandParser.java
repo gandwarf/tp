@@ -29,12 +29,12 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         boolean isNoFilterPresent = !isPreferenceFilterPresent && !isPriorityFilterPresent;
         if (isBothFiltersPresent) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_ONLY_ONE_FILTER));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_ONLY_ONE_FILTER_ALLOWED));
         }
 
         if (isNoFilterPresent) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_ONLY_ONE_FILTER));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_ONLY_ONE_FILTER_ALLOWED));
         }
 
         if (isPriorityFilterPresent) {
