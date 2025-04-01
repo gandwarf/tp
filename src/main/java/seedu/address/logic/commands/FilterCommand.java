@@ -21,8 +21,8 @@ public class FilterCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + "shampoo";
 
-    public static final String MESSAGE_ONLY_ONE_FILTER_ALLOWED = "Filter command takes exactly one filter condition of either "
-            + "product preference or priority.";
+    public static final String MESSAGE_ONLY_ONE_FILTER_ALLOWED = "Filter command takes exactly one filter condition "
+            + "of either product preference or priority.";
     private final Predicate<Client> predicate;
 
     public FilterCommand(Predicate<Client> predicate) {
