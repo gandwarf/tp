@@ -31,8 +31,6 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
-UiManager --> Logic
-UiManager --> LogsCenter
 
 MainWindow *-down-> "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
@@ -40,7 +38,6 @@ MainWindow *-down-> "1" ClientListPanel
 MainWindow --> "0..1" ClientDetailPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
-MainWindow -left-> Logic
 
 MainWindow -left-|> "UiPart<Stage>" as MainWindowUiPart
 HelpWindow --|> "UiPart<Stage>" as HelpWindowUiPart
@@ -54,7 +51,6 @@ StatusBarFooter --|> "UiPart<Region>" as StatusBarFooterUiPart
 ClientListPanel -down-> "*" ClientCard
 ClientCard ..> Model
 ClientDetailPanel ..> Model
-HelpWindow ..> LogsCenter
 
 note bottom of UiPart
   T = Stage (Windows) or Region (Components)
@@ -69,5 +65,4 @@ CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
 ClientDetailPanel -[hidden]right- ClientListPanel
 
-MainWindow -[hidden]-|> UiPart
 @enduml
