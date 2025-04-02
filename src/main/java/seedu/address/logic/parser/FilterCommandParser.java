@@ -5,9 +5,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.client.Client;
 import seedu.address.model.client.predicates.PriorityPredicate;
 import seedu.address.model.client.predicates.ProductPreferenceContainsKeywordsPredicate;
 
@@ -23,29 +25,32 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PREFERENCE, PREFIX_PRIORITY);
 
-        boolean isPreferenceFilterPresent = argMultimap.getValue(PREFIX_PREFERENCE).isPresent();
+        if (!isExactlyOneFilter(argMultimap)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_ONLY_ONE_FILTER));
+        }
+
         boolean isPriorityFilterPresent = argMultimap.getValue(PREFIX_PRIORITY).isPresent();
-        boolean isBothFiltersPresent = isPreferenceFilterPresent && isPriorityFilterPresent;
-        boolean isNoFilterPresent = !isPreferenceFilterPresent && !isPriorityFilterPresent;
-        if (isBothFiltersPresent) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_ONLY_ONE_FILTER));
-        }
 
-        if (isNoFilterPresent) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_ONLY_ONE_FILTER));
-        }
-
+        Predicate<Client> predicate;
         if (isPriorityFilterPresent) {
-            PriorityPredicate priorityPredicate =
+             predicate =
                     new PriorityPredicate(ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY)));
-            return new FilterCommand(priorityPredicate);
+
         } else {
-            return new FilterCommand(new ProductPreferenceContainsKeywordsPredicate(
-                    Arrays.asList(argMultimap.getValue(PREFIX_PREFERENCE).get().split("\\s+"))));
+            predicate = new ProductPreferenceContainsKeywordsPredicate(
+                    Arrays.asList(argMultimap.getValue(PREFIX_PREFERENCE).get().split("\\s+")));
         }
 
+        return new FilterCommand(predicate);
+
+    }
+
+    /**
+     * Returns true if exactly one filter is present in the argument multimap.
+     */
+    private boolean isExactlyOneFilter(ArgumentMultimap argMultimap) {
+        return argMultimap.getSize() == 2;
     }
 
 }

@@ -23,6 +23,7 @@ public class FilterCommand extends Command {
 
     public static final String MESSAGE_ONLY_ONE_FILTER = "Filter command takes exactly one filter condition of either "
             + "product preference or priority.";
+
     private final Predicate<Client> predicate;
 
     public FilterCommand(Predicate<Client> predicate) {
