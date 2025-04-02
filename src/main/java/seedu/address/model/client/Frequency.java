@@ -7,7 +7,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Client's frequency of product purchasing.
  */
 public class Frequency {
-    public static final String MESSAGE_CONSTRAINTS = "Frequency should be a non-negative integer";
+    public static final String MESSAGE_CONSTRAINTS = "Frequency should be a non-negative integer which is "
+            + "smaller than 2,147,483,648";
 
     public final int frequency;
 
