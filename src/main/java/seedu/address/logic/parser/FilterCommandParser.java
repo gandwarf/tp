@@ -31,15 +31,19 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
 
         boolean isPriorityFilterPresent = argMultimap.getValue(PREFIX_PRIORITY).isPresent();
+        boolean isPreferenceFilterPresent = argMultimap.getValue(PREFIX_PREFERENCE).isPresent();
 
         Predicate<Client> predicate;
         if (isPriorityFilterPresent) {
              predicate =
                     new PriorityPredicate(ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY)));
 
-        } else {
+        } else if (isPreferenceFilterPresent) {
             predicate = new ProductPreferenceContainsKeywordsPredicate(
                     Arrays.asList(argMultimap.getValue(PREFIX_PREFERENCE).get().split("\\s+")));
+        } else {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_ONLY_ONE_FILTER));
         }
 
         return new FilterCommand(predicate);
