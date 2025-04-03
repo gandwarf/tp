@@ -18,8 +18,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Description;
 import seedu.address.model.client.Email;
+import seedu.address.model.client.Frequency;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.ProductPreference;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -195,6 +197,42 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseProductPreference_validInput_returnsProductPreference() throws Exception {
+        Optional<String> input = Optional.of("   apple juice   ");
+        Optional<Frequency> freq = Optional.of(new Frequency(3));
+        ProductPreference expected = new ProductPreference("apple juice", new Frequency(3));
+        assertEquals(Optional.of(expected), ParserUtil.parseProductPreference(input, freq));
+    }
+
+    @Test
+    public void parseProductPreference_emptyOptionalInput_returnsEmpty() throws Exception {
+        Optional<String> input = Optional.empty();
+        Optional<Frequency> freq = Optional.of(new Frequency(5));
+        assertEquals(Optional.empty(), ParserUtil.parseProductPreference(input, freq));
+    }
+
+    @Test
+    public void parseProductPreference_trimmedEmptyInput_throwsParseException() {
+        Optional<String> input = Optional.of("   ");
+        Optional<Frequency> freq = Optional.of(new Frequency(2));
+        assertThrows(ParseException.class, () -> ParserUtil.parseProductPreference(input, freq));
+    }
+
+    @Test
+    public void parseProductPreference_nullInput_throwsNullPointerException() {
+        Optional<Frequency> freq = Optional.of(new Frequency(1));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseProductPreference(null, freq));
+    }
+
+    @Test
+    public void parseProductPreference_nullFrequency_returnsProductPreferenceWithDefaultFrequency() throws Exception {
+        Optional<String> input = Optional.of("water");
+        Optional<Frequency> freq = Optional.empty();
+        ProductPreference expected = new ProductPreference("water", new Frequency(0));
+        assertEquals(Optional.of(expected), ParserUtil.parseProductPreference(input, freq));
     }
 
     @Test
