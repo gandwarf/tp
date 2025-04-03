@@ -59,7 +59,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Optional<Priority> priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY));
 
         Client client = new Client(name, phone, email, address, tagList, productPreference,
-                Optional.ofNullable(null), priority);
+                Optional.empty(), priority);
 
         return new AddCommand(client);
     }
