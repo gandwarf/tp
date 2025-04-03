@@ -47,7 +47,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     Arrays.asList(argMultimap.getValue(PREFIX_PREFERENCE).get().split("\\s+")));
         } else {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_ONLY_ONE_FILTER));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_ONLY_ONE_FILTER_ALLOWED));
         }
 
         return new FilterCommand(predicate);
