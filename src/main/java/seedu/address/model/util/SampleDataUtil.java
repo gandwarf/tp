@@ -29,7 +29,7 @@ public class SampleDataUtil {
                 getTagSet("friends"), Optional.of(new ProductPreference("tea bag", new Frequency(2))),
                     Optional.of(new Description("Successful busniessman")),
                     Optional.of(Priority.PREMIUM)),
-            new Client(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+            new Client(new Name("Bernice Yu"), new Phone("98272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getTagSet("colleagues", "friends"), Optional.of(new ProductPreference("coffee", new Frequency(1))),
                     Optional.of(new Description("Usually free on weekends")),
