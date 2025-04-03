@@ -88,7 +88,8 @@ ClientConnect is a **desktop app for managing contacts, optimized for use via a 
 
 ### Viewing help : `help`
 
-You may feel stuck after using ClientConnect for a while. To review how it's used, you can show a message explaining how to access the help page.
+You may feel stuck after using ClientConnect for a while.<br>
+To review how it's used, you can show a message explaining how to access the help page.<br>
 
 ![help message](images/helpMessage.png)
 
@@ -110,7 +111,7 @@ add name/NAME phone/PHONE_NUMBER email/EMAIL address/ADDRESS [tag/TAG] [pref/pre
 
 - A client can have any number of tags (including 0).
 - When there is a preference then there should be a frequency. If not, then frequency will be 0 by default. While preference is also optional like tag.  
-- Phone: Only valid if they:
+- Phone: Only valid if they
   - Are 8 digits.
   - Start with 3, 6, 8, or 9.
   - Do not have 9 as their first and second digits.
@@ -119,7 +120,9 @@ add name/NAME phone/PHONE_NUMBER email/EMAIL address/ADDRESS [tag/TAG] [pref/pre
 </box>
 
 <box type="important" seamless>
-IMPORTANT! Keep in mind that any feature that includes adding and/ or modifying a client's details will have these constraints applied!
+
+**IMPORTANT!** Keep in mind that any feature that includes adding and/ or modifying a client's details will have these constraints applied!
+
 </box>
 
 Examples:
@@ -141,7 +144,8 @@ list
 ### Editing a client : `edit`
 
 Ready to update a client’s details? With the `edit` command, you can easily change information like name, phone number, 
-email, address, tags, and product preferences! Just follow this format:
+email, address, tags, and product preferences!<br>
+Just follow this format:<br>
 
 ```
 edit INDEX [name/NAME] [phone/PHONE] [email/EMAIL] [address/ADDRESS] [tag/TAG] [pref/PRODUCT PREFERENCE] [freq/PRODUCT FREQUENCY]…​`
@@ -149,9 +153,13 @@ edit INDEX [name/NAME] [phone/PHONE] [email/EMAIL] [address/ADDRESS] [tag/TAG] [
 
 Here's how it works:
 * **Select Your Client:** Replace **INDEX** with the client’s number from your current list.
+
     <box type="tip" seamless>
-    Remember, it must be a positive integer.
+
+    Remember, the INDEX must be a **positive integer**, e.g. 1, 2, 3, …​
+
     </box>
+  
 * **Update Your Info:** Add one or more optional fields to update specific details. At least one field must be provided.
 * **Automatic Replacement:** Each field you specify will replace the existing value. For tags, the old ones are completely removed—unless you leave them out.
     <box type="info" seamless>
@@ -162,41 +170,57 @@ Here's how it works:
 If you only provide `pref/`, the frequency defaults to 0.
 
     <box type="tip" seamless>
+  
     Using only `freq/` without `pref/` isn’t allowed.
+
     </box>
+
 Examples:
 *  **Update Contact Info:**
    Type `edit 1 phone/91234567 email/johndoe@example.com` to instantly change the phone number and email of the 1st client to 91234567 and johndoe@example.com.
 *  **Rename and Reset Tags:**
    Type `edit 1 name/Betsy Crower tag/` to update the 1st client’s name to Betsy Crower while clearing all their tags.
-   ![result for 'before edit'](images/EditCommandUi_BeforeEditResult.png)<br>
-   ![result for 'before edit'](images/EditCommandUi_AfterEditResult.png)
+
+    **Wait for it...**<br>
+  ![result for 'before edit'](images/EditCommandUi_BeforeEditResult.png)<br>
+
+   **Boom! Magic!**<br>
+  ![result for 'before edit'](images/EditCommandUi_AfterEditResult.png)<br>
 
 ### Describing a client : desc
 
-Sometimes, you may want to include some other details or notes for your client. We have just the thing for you! You can describe your client as such:
+Sometimes, you may want to include some other details or notes for your client. We have just the thing for you!<br>
+You can describe your client as such:<br>
 
 ```
 desc INDEX DESCRIPTION
 ```
 
 <box type="tip" seamless>
-The INDEX must be a positive integer 1, 2, 3, …​
+
+The INDEX must be a **positive integer**, e.g. 1, 2, 3, …​
+
 </box>
 
 * The DESCRIPTION can be any kinds of text! Including empty ones.
 
 <box type="tip" seamless>
-If you would like to clear out a client's description, simply leaving a blank description will do!
+
+If you would like to ***clear out*** a client's description, simply leaving a ***blank*** description will do!
+
 </box>
 
 Examples:
-* `desc 1 This is Alex, and he loves shampoo!` would give Alex just the description that fits him!
+* `desc 1 This is Alex, and he loves shampoo!` would give Alex just the description that fits him!<br>
  ![result for 'desc 1'](images/DescAlexResult.png)<br>
+
+* On the other hand, you can clear out Alex's description by passing in nothing!<br>
+  ![result for empty 'desc 1'](images/DescAlexEmptyResult.png)<br>
 
 ### Locating clients: `find`
 
-You can find clients whose names contain any of the given keywords. You'll have access to certain clients who are tagged specifically or had purchased a certain product from you.
+You can find clients whose names contain any of the given keywords.<br>
+You'll have access to certain clients who are tagged specifically or had purchased a certain product from you.<br>
 
 You may use the following format for searching:<br>
 ```
@@ -229,27 +253,34 @@ Examples:
 
 ### Deleting a client : `delete`
 
-You can remove a client from your address book using the **delete** command. To do so, type:
+You can remove a client from your address book using the **delete** command.<br>
+To do so, type:<br>
 
 ```
 delete INDEX
 ```
 
 <box type="tip" seamless>
-The INDEX must be a positive integer 1, 2, 3, …​
+
+The INDEX must be a **positive integer**, e.g. 1, 2, 3, …​
+
 </box>
 
 Examples:
 * After using the `find Betsy` command, typing `delete 1` will remove the 1st client from the search results.
 * If you run the `list` command, then typing `delete 7` will remove the 7th client from your address book.<br>
+
+  **Just one second...**<br>
   ![result for 'before delete 7'](images/DeleteCommandUi_BeforeDeleteResult.png)<br>
 
-* There he goes!<br>
+  **There he goes!**<br>
   ![result for 'after delete 7'](images/DeleteCommandUi_AfterDeleteResult.png)<br>
 
 ### Expand Client View: `expand`
 
-You can use the **expand** command to see more details about a specific client. Just type:
+Written down a long, nice `description` for your client?<br>
+You can use the **expand** command to see more details and get the ***FULL*** view about a specific client.<br>
+Just type:
 
 ```
 expand INDEX
@@ -257,8 +288,11 @@ expand INDEX
 
 * where INDEX is the position number of the client in your current list. 
 * for example, 1 for the first client, 2 for the second, and so on
+
 <box type="tip" seamless>
-The INDEX must be a positive integer 1, 2, 3, …​
+
+The INDEX must be a **positive integer**, e.g. 1, 2, 3, …​
+
 </box>
 
 Examples:
@@ -268,18 +302,22 @@ Examples:
 
 ### Ranking clients : `rank`
 
-After a lot of searching and listing, you may want to find out clients that have higher priority than others. In ClientConnect, ranking is possible to sort the current list of clients shown on the screen.
+After a lot of searching and listing, you may want to find out clients that have higher priority than others.<br>
+In ClientConnect, ranking is possible to **sort the current list of clients** shown on the screen.<br>
 
 Type in the following format, using the keyword that you would like to rank your clients by:<br>
 ```
 rank KEYWORD
 ```
 
-> ❗ **NOTE**<br>
-> * The keyword must be one of the defined keywords.
-> * Some examples of `KEYWORD`:
->   * `total` to rank by the clients' total purchase in descending order.
->   * `name` to rank by the clients' names in lexicographic order (i.e. ascending order alphabetically and numerically).
+<box type="tip" seamless>
+
+Take note that the `KEYWORD` must be one of the defined keywords.<br>
+Some examples of `KEYWORD`:
+  * `total` to rank by the clients' total purchase in descending order.
+  * `name` to rank by the clients' names in lexicographic order (i.e. ascending order alphabetically and numerically).
+
+</box>
 
 * Ranks the current list of clients by the specified `KEYWORD`.
 * The keyword refers to the attribute or factor you may rank the clients by.
@@ -295,7 +333,8 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-To remove every client from your address book at once, just type:
+Don't need any of clients anymore? Looking to restart anew?<br>
+To **remove every client** from your address book at once, just type:<br>
 
 ```
 clear
@@ -306,7 +345,7 @@ This command will instantly wipe all entries for you.<br>
 
 ### Exiting the program : `exit`
 
-When you're ready to close the application, simply type:
+When you're ready to **close** the application, simply type:
 
 ```
 exit
@@ -326,11 +365,13 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
-### Archiving data files `[coming in v2.0]`
+### Multiple Product Preferences per Client `[coming in v2.0]`
 
-_Details coming soon ..._
+We are looking into supporting multiple product preferences for each client for more effective preference tracking.
+_Stay tuned!_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -356,6 +397,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [name/NAME] [phone/PHONE_NUMBER] [email/EMAIL] [address/ADDRESS] [tag/TAG] [pref/PRODUCT_PREFERENCE] [freq/PRODUCT_FREQUENCY]…​`<br> e.g.,`edit 2 name/James Lee email/jameslee@example.com`
+**Describe** | `desc 1 This is Alex :)` `desc 2`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`, `find friends`, `find shampoo`
 **List**   | `list`
 **Help**   | `help`
