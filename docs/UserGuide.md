@@ -26,7 +26,7 @@ ClientConnect is a **desktop app for managing contacts, optimized for use via a 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui_v3.png)
 
-1. Feel free totype the command in the command box and press Enter to execute it! e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Feel free to type the command in the command box and press Enter to execute it! e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
