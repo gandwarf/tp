@@ -18,7 +18,7 @@ ClientConnect is a **desktop app for managing contacts, optimized for use via a 
 1. Ensure you have [Java `17`](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103T-W13-2/tp/releases).
 
 1. Copy the `.jar` file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -33,9 +33,9 @@ ClientConnect is a **desktop app for managing contacts, optimized for use via a 
    java -jar ./addressbook.jar
    ```
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui_v2.png)
+   ![Ui](images/Ui_v3.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Feel free to type the command in the command box and press Enter to execute it! e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -69,16 +69,16 @@ ClientConnect is a **desktop app for managing contacts, optimized for use via a 
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add name/NAME`, `NAME` is a parameter which can be used as `add name/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `name/NAME [tag/TAG]` can be used as `name/John Doe tag/friend` or as `name/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[tag/TAG]…​` can be used as ` ` (i.e. 0 times), `tag/friend`, `tag/friend tag/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `name/NAME phone/PHONE_NUMBER`, `phone/PHONE_NUMBER name/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -100,19 +100,26 @@ help
 
 ### Adding a client: `add`
 
-Adds a client to the address book by just typing:
+Let's get started with adding your very first client! To do so, all you have to type is the following command:
+
 ```
-add
+add name/NAME phone/PHONE_NUMBER email/EMAIL address/ADDRESS [tag/TAG] [pref/preference] [freq/frequency]
 ```
-Format: `add name/NAME phone/PHONE_NUMBER email/EMAIL address/ADDRESS [tag/TAG] [pref/preference] [freq/frequency]
 
 <box type="tip" seamless>
 
-- A client can have any number of tags (including 0)  
+- A client can have any number of tags (including 0).
 - When there is a preference then there should be a frequency. If not, then frequency will be 0 by default. While preference is also optional like tag.  
-- Phone: Only number digits (0-9) of length 8 without spaces  
-- Name: Only case-sensitive alphabets (a-z) and one space between each word  
+- Phone: Only valid if they:
+  - Are 8 digits.
+  - Start with 3, 6, 8, or 9.
+  - Do not have 9 as their first and second digits.
+- Name: Only case-sensitive alphabets (a-z) and one space between each word. Note that each first letter of your name will be converted into upper-case. 
 - Address: Any input is ok (if only alphabet and number, then user can not input “#”)  
+</box>
+
+<box type="important" seamless>
+IMPORTANT! Keep in mind that any feature that includes adding and/ or modifying a client's details will have these constraints applied!
 </box>
 
 Examples:
@@ -142,14 +149,21 @@ edit INDEX [name/NAME] [phone/PHONE] [email/EMAIL] [address/ADDRESS] [tag/TAG] [
 
 Here's how it works:
 * **Select Your Client:** Replace **INDEX** with the client’s number from your current list.
-> Remember, it must be a positive integer.
+    <box type="tip" seamless>
+    Remember, it must be a positive integer.
+    </box>
 * **Update Your Info:** Add one or more optional fields to update specific details. At least one field must be provided.
 * **Automatic Replacement:** Each field you specify will replace the existing value. For tags, the old ones are completely removed—unless you leave them out.
+    <box type="info" seamless>
+    Remember that first letters of your client's name will be capitalized!
+    </box>
 * **Clear Tags:** To remove all tags, simply type `tag/` without any tags following it.
 * **Product Preferences:** When updating product preferences, include both `pref/` and `freq/` together. 
 If you only provide `pref/`, the frequency defaults to 0.
-> Using only `freq/` without `pref/` isn’t allowed.
 
+    <box type="tip" seamless>
+    Using only `freq/` without `pref/` isn’t allowed.
+    </box>
 Examples:
 *  **Update Contact Info:**
    Type `edit 1 phone/91234567 email/johndoe@example.com` to instantly change the phone number and email of the 1st client to 91234567 and johndoe@example.com.
@@ -157,6 +171,28 @@ Examples:
    Type `edit 1 name/Betsy Crower tag/` to update the 1st client’s name to Betsy Crower while clearing all their tags.
    ![result for 'before edit'](images/EditCommandUi_BeforeEditResult.png)<br>
    ![result for 'before edit'](images/EditCommandUi_AfterEditResult.png)
+
+### Describing a client : desc
+
+Sometimes, you may want to include some other details or notes for your client. We have just the thing for you! You can describe your client as such:
+
+```
+desc INDEX DESCRIPTION
+```
+
+<box type="tip" seamless>
+The INDEX must be a positive integer 1, 2, 3, …​
+</box>
+
+* The DESCRIPTION can be any kinds of text! Including empty ones.
+
+<box type="tip" seamless>
+If you would like to clear out a client's description, simply leaving a blank description will do!
+</box>
+
+Examples:
+* `desc 1 This is Alex, and he loves shampoo!` would give Alex just the description that fits him!
+ ![result for 'desc 1'](images/DescAlexResult.png)<br>
 
 ### Locating clients: `find`
 
@@ -196,18 +232,20 @@ Examples:
 You can remove a client from your address book using the **delete** command. To do so, type:
 
 ```
-expand INDEX
+delete INDEX
 ```
 
-* Replace **INDEX** with the number corresponding to the client in your current list 
-* For example, 1 for the first client, 2 for the second, etc.
-> Remember, the INDEX must be a **positive integer** 1, 2, 3, …​
+<box type="tip" seamless>
+The INDEX must be a positive integer 1, 2, 3, …​
+</box>
 
 Examples:
 * After using the `find Betsy` command, typing `delete 1` will remove the 1st client from the search results.
 * If you run the `list` command, then typing `delete 7` will remove the 7th client from your address book.<br>
   ![result for 'before delete 7'](images/DeleteCommandUi_BeforeDeleteResult.png)<br>
-  ![result for 'after delete 7'](images/DeleteCommandUi_AfterDeleteResult.png)
+
+* There he goes!<br>
+  ![result for 'after delete 7'](images/DeleteCommandUi_AfterDeleteResult.png)<br>
 
 ### Expand Client View: `expand`
 
@@ -219,12 +257,14 @@ expand INDEX
 
 * where INDEX is the position number of the client in your current list. 
 * for example, 1 for the first client, 2 for the second, and so on
-> The INDEX must be a **positive integer** 1, 2, 3, …​
+<box type="tip" seamless>
+The INDEX must be a positive integer 1, 2, 3, …​
+</box>
 
 Examples:
 * After running the `list` command, typing `expand 2` will show more details for the second client.
 * If you search with `find Joe`, then typing `expand 1` will display the details for the first client in your search results.<br>
-![result for 'expand 1'](images/ExpandCommandUi.png)
+![result for 'expand 1'](images/ExpandCommandUi.png)<br>
 
 ### Ranking clients : `rank`
 
