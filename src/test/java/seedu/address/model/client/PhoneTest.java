@@ -83,10 +83,10 @@ public class PhoneTest {
 
     @Test
     public void equals() {
-        Phone phone = new Phone("12345678");
+        Phone phone = new Phone("91345678");
 
         // same values -> returns true
-        assertTrue(phone.equals(new Phone("12345678")));
+        assertTrue(phone.equals(new Phone("91345678")));
 
         // same object -> returns true
         assertTrue(phone.equals(phone));

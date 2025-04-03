@@ -73,9 +73,9 @@ public class CategoryContainsKeywordPredicateTest {
         assertFalse(predicate.test(new ClientBuilder().withTags("business", "friend").build()));
 
         // Keywords match name, phone, email and address, but does not match category
-        predicate = new CategoryContainsKeywordsPredicate(Arrays.asList("Alice", "12345678", "alice@email.com",
+        predicate = new CategoryContainsKeywordsPredicate(Arrays.asList("Alice", "92345678", "alice@email.com",
                 "Main", "Street"));
-        assertFalse(predicate.test(new ClientBuilder().withName("Alice").withPhone("12345678")
+        assertFalse(predicate.test(new ClientBuilder().withName("Alice").withPhone("92345678")
                 .withEmail("alice@email.com").withAddress("Main Street").withTags("business", "VIP").build()));
     }
 
