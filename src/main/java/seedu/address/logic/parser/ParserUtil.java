@@ -141,11 +141,18 @@ public class ParserUtil {
     public static Optional<ProductPreference> parseProductPreference(
             Optional<String> productPreference, Optional<Frequency> frequency) throws ParseException {
         requireNonNull(productPreference);
-        int freqValue = frequency.map(x ->x.frequency).orElse(0);
-        return productPreference
-                .map(String::trim)
-                .filter(s -> !s.isEmpty())
-                .map(pref -> new ProductPreference(pref, new Frequency(freqValue)));
+        int freqValue = frequency.map(x -> x.frequency).orElse(0);
+
+        if (productPreference.isEmpty()) {
+            return Optional.empty();
+        }
+
+        String trimmed = productPreference.get().trim();
+        if (trimmed.isEmpty()) {
+            throw new ParseException("Product preference cannot be empty or whitespace only");
+        }
+
+        return Optional.of(new ProductPreference(trimmed, new Frequency(freqValue)));
     }
 
     /**
