@@ -102,12 +102,19 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a client).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is then executed by the `LogicManager`.
+3. During execution, the command may interact with the `Model` to perform necessary operations (e.g. deleting a client). While this is shown as a single step in the diagram above for simplicity, it often involves multiple method calls between the `Command` and `Model`.
+4. The result of the command execution is encapsulated in a `CommandResult` object which is returned from `Logic`.
 
-Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
+Internally, `LogicManager` also handles logging and error tracking through the `LogsCenter` utility. This enables detailed logs for actions such as the input command string and any exceptions thrown during parsing or execution, providing transparency and easing debugging.
+
+The `Logic` component is designed with extensibility in mind. To support a new command, developers simply need to:
+- Implement a new subclass of `Command` (e.g., `SortCommand`)
+- Create a matching parser (e.g., `SortCommandParser`) that implements the `Parser<T>` interface
+- Add a corresponding `case` to the `AddressBookParser#parseCommand` method
+
+This modular design makes it straightforward to extend the system while maintaining clarity and separation of concerns.
+) that are used for parsing a user command:
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
