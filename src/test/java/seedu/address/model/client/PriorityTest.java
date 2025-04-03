@@ -2,6 +2,8 @@ package seedu.address.model.client;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -37,4 +39,30 @@ public class PriorityTest {
         assertEquals(Priority.fromString("PREMIUM"), Priority.PREMIUM);
         assertEquals(Priority.fromString("VIP"), Priority.VIP);
     }
+
+    @Test
+    void isValidIntegerPriorityValidValue() {
+        assertTrue(Priority.isValidIntegerPriority(1));
+        assertTrue(Priority.isValidIntegerPriority(2));
+        assertTrue(Priority.isValidIntegerPriority(3));
+    }
+
+    @Test
+    void isValidIntegerPriorityInvalidValue() {
+        assertFalse(Priority.isValidIntegerPriority(0));
+        assertFalse(Priority.isValidIntegerPriority(4));
+        assertFalse(Priority.isValidIntegerPriority(-1));
+    }
+
+    @Test
+    void fromStringInvalidValueThrowsIllegalValueException() {
+        assertThrows(IllegalValueException.class, () -> Priority.fromString("INVALID"));
+        assertThrows(IllegalValueException.class, () -> Priority.fromString("")); //empty string
+        assertThrows(IllegalValueException.class, () -> Priority.fromString("   ")); //only spaces
+        assertThrows(IllegalValueException.class, () -> Priority.fromString("vip")); //lowercase
+        assertThrows(IllegalValueException.class, () -> Priority.fromString("PREMIUMVIP")); //concatenated
+        assertThrows(IllegalValueException.class, () -> Priority.fromString("Vip")); //mixed case
+    }
+
+
 }

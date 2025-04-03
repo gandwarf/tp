@@ -29,11 +29,6 @@ public class ProductPreference {
         return frequency;
     }
 
-    public String getProductPreference() {
-        return productPreference;
-    }
-
-    //TODO: Change this method later on
     @Override
     public String toString() {
         return productPreference;
