@@ -61,6 +61,24 @@ public class FrequencyTest {
         assertEquals(frequency1.hashCode(), frequency2.hashCode());
     }
 
+    @Test
+    void toStringReturnsCorrectString() {
+        Frequency frequency = new Frequency(5);
+        assertEquals("5", frequency.toString());
+    }
+
+    @Test
+    void toStringZeroFrequency() {
+        Frequency frequency = new Frequency(0);
+        assertEquals("0", frequency.toString());
+    }
+
+    @Test
+    void toStringLargeFrequency() {
+        Frequency frequency = new Frequency(1000);
+        assertEquals("1000", frequency.toString());
+    }
+
 
 
 
