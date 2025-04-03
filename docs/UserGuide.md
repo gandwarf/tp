@@ -178,8 +178,6 @@ If you would like to clear out a client's description, simply leaving a blank de
 Examples:
 * `desc 1 This is Alex, and he loves shampoo!` would give Alex just the description that fits him!
  ![result for 'desc 1'](images/DescAlexResult.png)<br>
-* On the other hand, `desc 1` would clear it out!
- 
 
 ### Locating clients: `find`
 
