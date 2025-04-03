@@ -59,7 +59,6 @@
             </VBox>
         </content>
     </ScrollPane>
-    
     <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
