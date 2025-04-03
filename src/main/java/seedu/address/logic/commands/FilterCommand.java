@@ -18,8 +18,10 @@ public class FilterCommand extends AbstractFilterCommand {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + "shampoo";
 
-    public static final String MESSAGE_ONLY_ONE_FILTER = "Filter command takes exactly one filter condition of either "
+
+    public static final String MESSAGE_ONLY_ONE_FILTER_ALLOWED = "Filter command takes exactly one filter condition of either "
             + "product preference or priority and the arguments must not be empty!";
+
 
     public FilterCommand(Predicate<Client> predicate) {
         super(predicate);

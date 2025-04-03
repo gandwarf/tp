@@ -26,6 +26,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PREFERENCE, PREFIX_PRIORITY);
 
+
         boolean isPriorityFilterPresent = isArgumentPresent(argMultimap.getValue(PREFIX_PRIORITY));
         boolean isPreferenceFilterPresent = isArgumentPresent(argMultimap.getValue(PREFIX_PREFERENCE));
         boolean isBothFilterPresent = isPriorityFilterPresent && isPreferenceFilterPresent;
@@ -33,7 +34,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         if (isBothFilterPresent || isNeitherFilterPresent) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_ONLY_ONE_FILTER));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_ONLY_ONE_FILTER_ALLOWED));
         }
 
         Predicate<Client> predicate;
