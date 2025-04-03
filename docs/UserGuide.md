@@ -24,7 +24,7 @@ ClientConnect is a **desktop app for managing contacts, optimized for use via a 
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui_v2.png)
+   ![Ui](images/Ui_v3.png)
 
 1. Feel free totype the command in the command box and press Enter to execute it! e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -176,7 +176,10 @@ If you would like to clear out a client's description, simply leaving a blank de
 </box>
 
 Examples:
-
+* `desc 1 This is Alex, and he loves shampoo!` would give Alex just the description that fits him!
+ ![result for 'desc 1'](images/DescAlexResult.png)<br>
+* On the other hand, `desc 1` would clear it out!
+ 
 
 ### Locating clients: `find`
 
