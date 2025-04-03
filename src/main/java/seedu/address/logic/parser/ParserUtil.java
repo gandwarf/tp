@@ -144,6 +144,7 @@ public class ParserUtil {
         int freqValue = frequency.map(x ->x.frequency).orElse(0);
         return productPreference
                 .map(String::trim)
+                .filter(s -> !s.isEmpty())
                 .map(pref -> new ProductPreference(pref, new Frequency(freqValue)));
     }
 
