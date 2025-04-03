@@ -10,9 +10,9 @@
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "email": "pauline@example.com",
+    "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "productPreference" : "tea cup",
     "frequency" : 0
-  } ]
+  }]
 }
