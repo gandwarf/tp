@@ -228,7 +228,9 @@ Examples:
 * After using the `find Betsy` command, typing `delete 1` will remove the 1st client from the search results.
 * If you run the `list` command, then typing `delete 7` will remove the 7th client from your address book.<br>
   ![result for 'before delete 7'](images/DeleteCommandUi_BeforeDeleteResult.png)<br>
-  ![result for 'after delete 7'](images/DeleteCommandUi_AfterDeleteResult.png)
+
+* There he goes!<br>
+  ![result for 'after delete 7'](images/DeleteCommandUi_AfterDeleteResult.png)<br>
 
 ### Expand Client View: `expand`
 
@@ -241,12 +243,13 @@ expand INDEX
 * where INDEX is the position number of the client in your current list. 
 * for example, 1 for the first client, 2 for the second, and so on
 <box type="tip" seamless>
-The INDEX must be a **positive integer** 1, 2, 3, …​
+The INDEX must be a positive integer 1, 2, 3, …​
 </box>
+
 Examples:
 * After running the `list` command, typing `expand 2` will show more details for the second client.
 * If you search with `find Joe`, then typing `expand 1` will display the details for the first client in your search results.<br>
-![result for 'expand 1'](images/ExpandCommandUi.png)
+![result for 'expand 1'](images/ExpandCommandUi.png)<br>
 
 ### Ranking clients : `rank`
 
