@@ -405,3 +405,17 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+_Team size: 5_
+
+1. **Support multiple product preferences for each client**: The current client only has one product preference and its frequency. We plan to make every client has a list of product preferences with its corresponding frequency, to meet a more realistic scenario.
+
+2. **New commands to work with product preference**: Once we have multiple product preferences for each client, we would also like to add a command `AddProductPreference` to add product preferences cumulatively for one client, and a command `DeleteProductPreference` to delete a certain product preference and its frequency for one client.
+
+3. **New commands to add tags cumulatively**: For the same reason, now we can only edit tags through `edit` command, and if we want to add a new tag to a client without touching existing tags, we will also have to type out all the existing tags in the command, which is very inconvenient and unpractical. We can add new command `AddTag` to add new tags cumulatively to a client, and another new command `DeleteTag` to delete a certain existing tag for a client.
+
+4. **Rank clients by product frequency of a certain product preference**: We want our `rank` command to be more useful, adding it's ability to rank in many ways, including rank clients based on the frequency of a certain product.
