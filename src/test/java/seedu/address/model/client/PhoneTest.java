@@ -20,30 +20,73 @@ public class PhoneTest {
     }
 
     @Test
-    public void isValidPhone() {
+    public void isEightDigits() {
         // null phone number
-        assertThrows(NullPointerException.class, () -> Phone.isValidPhone(null));
+        assertThrows(NullPointerException.class, () -> Phone.isEightDigits(null));
 
         // invalid phone numbers
-        assertFalse(Phone.isValidPhone("")); // empty string
-        assertFalse(Phone.isValidPhone(" ")); // spaces only
-        assertFalse(Phone.isValidPhone("91")); // not 8 numbers
-        assertFalse(Phone.isValidPhone("phone")); // non-numeric
-        assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
-        assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
-        assertFalse(Phone.isValidPhone("911")); // less than 8 numbers
-        assertFalse(Phone.isValidPhone("9312153434342324")); //more than 8 numbers
+        assertFalse(Phone.isEightDigits("")); // empty string
+        assertFalse(Phone.isEightDigits(" ")); // spaces only
+        assertFalse(Phone.isEightDigits("91")); // not 8 numbers
+        assertFalse(Phone.isEightDigits("phone")); // non-numeric
+        assertFalse(Phone.isEightDigits("9011p041")); // alphabets within digits
+        assertFalse(Phone.isEightDigits("9312 1534")); // spaces within digits
+        assertFalse(Phone.isEightDigits("911")); // less than 8 numbers
+        assertFalse(Phone.isEightDigits("9312153434342324")); //more than 8 numbers
 
         // valid phone numbers
-        assertTrue(Phone.isValidPhone("93121534")); //exactly 8 numbers
+        assertTrue(Phone.isEightDigits("93121534")); //exactly 8 numbers
+    }
+
+    @Test
+    public void isFirstDigitValid() {
+        // null phone number.
+        assertThrows(NullPointerException.class, () -> Phone.isFirstDigitValid(null));
+
+        // Invalid phone number.
+        assertThrows(AssertionError.class, () -> Phone.isFirstDigitValid("")); // empty string
+        assertThrows(AssertionError.class, () -> Phone.isFirstDigitValid("  ")); // spaces only
+        assertThrows(AssertionError.class, () -> Phone.isFirstDigitValid("123")); // not 8 numbers
+        assertThrows(AssertionError.class, () -> Phone.isFirstDigitValid("phone")); // not numeric
+        assertThrows(AssertionError.class, () -> Phone.isFirstDigitValid("9011p041")); // alphabets within digits
+        assertThrows(AssertionError.class, () -> Phone.isFirstDigitValid("9312 1534")); // spaces within digits
+        assertThrows(AssertionError.class, () -> Phone.isFirstDigitValid("9312153434342324")); //more than 8 numbers
+        assertFalse(Phone.isFirstDigitValid("52345618"));
+        assertFalse(Phone.isFirstDigitValid("00045678"));
+
+        // valid phone numbers
+        assertTrue(Phone.isFirstDigitValid("91234567"));
+        assertTrue(Phone.isFirstDigitValid("31524569"));
+        assertTrue(Phone.isFirstDigitValid("61524119"));
+        assertTrue(Phone.isFirstDigitValid("83264892"));
+    }
+
+    @Test
+    public void isSecondDigitValid() {
+        // null phone number.
+        assertThrows(NullPointerException.class, () -> Phone.isSecondDigitValid(null));
+
+        // Invalid phone number.
+        assertThrows(AssertionError.class, () -> Phone.isSecondDigitValid("")); // empty string
+        assertThrows(AssertionError.class, () -> Phone.isSecondDigitValid("  ")); // spaces only
+        assertThrows(AssertionError.class, () -> Phone.isSecondDigitValid("123")); // not 8 numbers
+        assertThrows(AssertionError.class, () -> Phone.isSecondDigitValid("phone")); // not numeric
+        assertThrows(AssertionError.class, () -> Phone.isSecondDigitValid("9011p041")); // alphabets within digits
+        assertThrows(AssertionError.class, () -> Phone.isSecondDigitValid("9312 1534")); // spaces within digits
+        assertThrows(AssertionError.class, () -> Phone.isSecondDigitValid("9312153434342324")); //more than 8 numbers
+        assertFalse(Phone.isSecondDigitValid("99345618"));
+
+        // valid phone numbers
+        assertTrue(Phone.isSecondDigitValid("91234567"));
+        assertTrue(Phone.isSecondDigitValid("39524569"));
     }
 
     @Test
     public void equals() {
-        Phone phone = new Phone("12345678");
+        Phone phone = new Phone("91345678");
 
         // same values -> returns true
-        assertTrue(phone.equals(new Phone("12345678")));
+        assertTrue(phone.equals(new Phone("91345678")));
 
         // same object -> returns true
         assertTrue(phone.equals(phone));

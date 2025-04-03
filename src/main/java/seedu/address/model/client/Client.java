@@ -36,7 +36,7 @@ public class Client {
     public Client(Name name, Phone phone, Email email, Address address,
                   Set<Tag> tags, Optional<ProductPreference> productPreference, Optional<Description> description,
                   Optional<Priority> priority) {
-        requireAllNonNull(name, phone, email, address, tags, productPreference, description);
+        requireAllNonNull(name, phone, email, address, tags, productPreference, description, priority);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -82,6 +82,10 @@ public class Client {
         return priority;
     }
 
+    public String getFullName() {
+        return name.fullName;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -102,6 +106,7 @@ public class Client {
         return otherClient != null
                 && otherClient.getName().equals(getName())
                 && otherClient.getPhone().equals(getPhone())
+                && otherClient.getEmail().equals(getEmail())
                 && otherClient.getAddress().equals(getAddress());
     }
 
@@ -127,6 +132,7 @@ public class Client {
                 && address.equals(otherClient.address)
                 && tags.equals(otherClient.tags)
                 && productPreference.equals(otherClient.productPreference)
+                && description.equals(otherClient.description)
                 && priority.equals(otherClient.priority);
     }
 
