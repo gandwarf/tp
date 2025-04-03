@@ -25,7 +25,7 @@ public class Description {
     }
 
     public static boolean isValidDescription(String test) {
-        return true;
+        return test != null;
     }
 
     @Override
