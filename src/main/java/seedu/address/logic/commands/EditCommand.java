@@ -107,7 +107,7 @@ public class EditCommand extends Command {
         Optional<ProductPreference> updatedProductPreference =
                 editClientDescriptor.getProductPreference().or(() -> clientToEdit.getProductPreference());
         Optional<Description> updatedDescription =
-                editClientDescriptor.getDescription().or(() -> clientToEdit.getDescription());
+                editClientDescriptor.getDescription();
 
         Optional<Priority> updatedPriority = editClientDescriptor.getPriority().or(() -> clientToEdit.getPriority());
 
