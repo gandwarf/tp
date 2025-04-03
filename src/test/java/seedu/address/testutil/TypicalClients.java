@@ -63,7 +63,7 @@ public class TypicalClients {
             .withPriority(3)
             .build();
     public static final Client ELLE = new ClientBuilder().withName("Elle Meyer")
-            .withPhone("19482224")
+            .withPhone("91482224")
             .withEmail("werner@example.com")
             .withAddress("michegan ave")
             .withTotalPurchase(5)
@@ -72,7 +72,7 @@ public class TypicalClients {
             .withPriority(2)
             .build();
     public static final Client FIONA = new ClientBuilder().withName("Fiona Kunz")
-            .withPhone("19482427")
+            .withPhone("91482427")
             .withEmail("lydia@example.com")
             .withAddress("little tokyo")
             .withTotalPurchase(6)
@@ -81,7 +81,7 @@ public class TypicalClients {
             .withPriority(1)
             .build();
     public static final Client GEORGE = new ClientBuilder().withName("George Best")
-            .withPhone("19482442")
+            .withPhone("91482442")
             .withEmail("anna@example.com")
             .withAddress("4th street")
             .withTotalPurchase(3)

@@ -82,6 +82,10 @@ public class Client {
         return priority;
     }
 
+    public String getFullName() {
+        return name.fullName;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

@@ -20,8 +20,8 @@ public class NameComparator implements Comparator<Client> {
      */
     @Override
     public int compare(Client clientA, Client clientB) {
-        String clientAName = clientA.getName().fullName;
-        String clientBName = clientB.getName().fullName;
+        String clientAName = clientA.getFullName();
+        String clientBName = clientB.getFullName();
 
         return clientAName.compareTo(clientBName);
     }
