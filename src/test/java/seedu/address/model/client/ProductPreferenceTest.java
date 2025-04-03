@@ -17,6 +17,7 @@ public class ProductPreferenceTest {
         ProductPreference pp1 = new ProductPreference("ProductA", new Frequency(1));
         ProductPreference pp2 = new ProductPreference("ProductA", new Frequency(1));
         ProductPreference pp3 = new ProductPreference("ProductB", new Frequency(2));
+        ProductPreference pp4 = new ProductPreference("ProductA", new Frequency(2));
 
         // same values -> returns true
         assertTrue(pp1.equals(pp2));
@@ -32,6 +33,9 @@ public class ProductPreferenceTest {
 
         // different product preference -> returns false
         assertFalse(pp1.equals(pp3));
+
+        // different frequency -> returns false
+        assertFalse(pp1.equals(pp4));
     }
 
     @Test

@@ -165,8 +165,8 @@ public class ClientBuilder {
     /**
      * Sets the {@code Priority} of the {@code Client} that we are building.
      */
-    public ClientBuilder withPriority(Priority priority) {
-        this.priority = Optional.of(priority);
+    public ClientBuilder withPriority(int priority) {
+        this.priority = Optional.of(Priority.fromInt(priority));
         return this;
     }
 

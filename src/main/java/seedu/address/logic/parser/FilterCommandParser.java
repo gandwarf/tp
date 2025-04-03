@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FilterCommand;
@@ -25,17 +26,19 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PREFERENCE, PREFIX_PRIORITY);
 
-        if (!isExactlyOneFilter(argMultimap)) {
+        boolean isPriorityFilterPresent = isArgumentPresent(argMultimap.getValue(PREFIX_PRIORITY));
+        boolean isPreferenceFilterPresent = isArgumentPresent(argMultimap.getValue(PREFIX_PREFERENCE));
+        boolean isBothFilterPresent = isPriorityFilterPresent && isPreferenceFilterPresent;
+        boolean isNeitherFilterPresent = !isPriorityFilterPresent && !isPreferenceFilterPresent;
+
+        if (isBothFilterPresent || isNeitherFilterPresent) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_ONLY_ONE_FILTER));
         }
 
-        boolean isPriorityFilterPresent = argMultimap.getValue(PREFIX_PRIORITY).isPresent();
-        boolean isPreferenceFilterPresent = argMultimap.getValue(PREFIX_PREFERENCE).isPresent();
-
         Predicate<Client> predicate;
         if (isPriorityFilterPresent) {
-             predicate =
+            predicate =
                     new PriorityPredicate(ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY)));
 
         } else if (isPreferenceFilterPresent) {
@@ -51,10 +54,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     }
 
     /**
-     * Returns true if exactly one filter is present in the argument multimap.
+     * Returns true if argument contains a non-empty value.
      */
-    private boolean isExactlyOneFilter(ArgumentMultimap argMultimap) {
-        return argMultimap.getSize() == 2;
+    private boolean isArgumentPresent(Optional<String> argument) {
+        return argument.map(String::trim).map(s -> !s.isEmpty()).orElse(false);
     }
 
 }

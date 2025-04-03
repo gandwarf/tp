@@ -1,12 +1,8 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
-import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 
 
@@ -23,7 +19,7 @@ public class FilterCommand extends AbstractFilterCommand {
             + "Example: " + COMMAND_WORD + "shampoo";
 
     public static final String MESSAGE_ONLY_ONE_FILTER = "Filter command takes exactly one filter condition of either "
-            + "product preference or priority.";
+            + "product preference or priority and the arguments must not be empty!";
 
     public FilterCommand(Predicate<Client> predicate) {
         super(predicate);

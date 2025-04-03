@@ -14,10 +14,10 @@ import seedu.address.testutil.ClientBuilder;
 public class PriorityPredicateTest {
 
     @Test
-    void matchesPriorityVIP() {
+    void matchesPriorityVip() {
         Priority priority = Priority.VIP;
         PriorityPredicate predicate = new PriorityPredicate(Optional.of(priority));
-        Client client = new ClientBuilder().withPriority(Priority.VIP).build();
+        Client client = new ClientBuilder().withPriority(3).build();
         assertTrue(predicate.test(client));
     }
 
@@ -25,7 +25,7 @@ public class PriorityPredicateTest {
     void matchesPriorityPremium() {
         Priority priority = Priority.PREMIUM;
         PriorityPredicate predicate = new PriorityPredicate(Optional.of(priority));
-        Client client = new ClientBuilder().withPriority(Priority.PREMIUM).build();
+        Client client = new ClientBuilder().withPriority(2).build();
         assertTrue(predicate.test(client));
     }
 
@@ -33,15 +33,15 @@ public class PriorityPredicateTest {
     void matchesPriorityStandard() {
         Priority priority = Priority.STANDARD;
         PriorityPredicate predicate = new PriorityPredicate(Optional.of(priority));
-        Client client = new ClientBuilder().withPriority(Priority.STANDARD).build();
+        Client client = new ClientBuilder().withPriority(1).build();
         assertTrue(predicate.test(client));
     }
 
     @Test
-    void doesNotMatchPriorityVIP() {
+    void doesNotMatchPriorityVip() {
         Priority priority = Priority.VIP;
         PriorityPredicate predicate = new PriorityPredicate(Optional.of(priority));
-        Client client = new ClientBuilder().withPriority(Priority.PREMIUM).build();
+        Client client = new ClientBuilder().withPriority(2).build();
         assertFalse(predicate.test(client));
     }
 
@@ -49,7 +49,7 @@ public class PriorityPredicateTest {
     void doesNotMatchPriorityPremium() {
         Priority priority = Priority.PREMIUM;
         PriorityPredicate predicate = new PriorityPredicate(Optional.of(priority));
-        Client client = new ClientBuilder().withPriority(Priority.STANDARD).build();
+        Client client = new ClientBuilder().withPriority(1).build();
         assertFalse(predicate.test(client));
     }
 
@@ -57,14 +57,14 @@ public class PriorityPredicateTest {
     void doesNotMatchPriorityStandard() {
         Priority priority = Priority.STANDARD;
         PriorityPredicate predicate = new PriorityPredicate(Optional.of(priority));
-        Client client = new ClientBuilder().withPriority(Priority.VIP).build();
+        Client client = new ClientBuilder().withPriority(3).build();
         assertFalse(predicate.test(client));
     }
 
     @Test
     void matchesEmptyPriority() {
         PriorityPredicate predicate = new PriorityPredicate(Optional.empty());
-        Client client = new ClientBuilder().withPriority(Priority.VIP).build();
+        Client client = new ClientBuilder().withPriority(3).build();
         assertFalse(predicate.test(client));
     }
 
