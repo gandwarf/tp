@@ -1,40 +1,30 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.function.Predicate;
 
-import seedu.address.logic.Messages;
-import seedu.address.model.Model;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.client.Client;
 
 
 /**
  * Filters all persons in the address book to display only those that match the given filter condition.
  */
-public class FilterCommand extends Command {
+public class FilterCommand extends AbstractFilterCommand {
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons based on either product preference"
-            + " or priority containing any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons based on either priority level or "
+            + "product preferencecontaining any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + "shampoo";
 
-    public static final String MESSAGE_ONLY_ONE_FILTER_ALLOWED = "Filter command takes exactly one filter condition "
-            + "of either product preference or priority.";
-    private final Predicate<Client> predicate;
+
+    public static final String MESSAGE_ONLY_ONE_FILTER_ALLOWED = "Filter command takes exactly one filter condition of either "
+            + "product preference or priority and the arguments must not be empty!";
+
 
     public FilterCommand(Predicate<Client> predicate) {
-        this.predicate = predicate;
-    }
-
-    @Override
-    public CommandResult execute(Model model) {
-        requireNonNull(model);
-        model.updateFilteredClientList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredClientList().size()));
+        super(predicate);
     }
 
     @Override
@@ -50,5 +40,12 @@ public class FilterCommand extends Command {
 
         FilterCommand otherFilterCommand = (FilterCommand) other;
         return predicate.equals(otherFilterCommand.predicate);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("predicate", predicate)
+                .toString();
     }
 }

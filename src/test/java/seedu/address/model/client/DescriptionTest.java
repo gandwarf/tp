@@ -75,4 +75,20 @@ public class DescriptionTest {
         // different description -> returns false
         assertFalse(description.equals(descriptionDifferent));
     }
+
+    @Test
+    public void testHashCode() {
+        Description description = new Description("I am a description");
+        Description descriptionCopy = new Description("I am a description");
+        Description descriptionDifferent = new Description("I am a different description");
+
+        // same object -> returns same hash code
+        assertEquals(description.hashCode(), description.hashCode());
+
+        // same values -> returns same hash code
+        assertEquals(description.hashCode(), descriptionCopy.hashCode());
+
+        // different description -> returns different hash code
+        assertFalse(description.hashCode() == descriptionDifferent.hashCode());
+    }
 }

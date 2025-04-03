@@ -75,4 +75,11 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Returns the number of arguments stored in the ArgumentMultimap.
+     */
+    public int getSize() {
+        return argMultimap.size();
+    }
 }
