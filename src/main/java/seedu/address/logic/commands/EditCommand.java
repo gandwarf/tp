@@ -157,7 +157,7 @@ public class EditCommand extends Command {
         private Optional<ProductPreference> productPreference = Optional.ofNullable(null);
         private Optional<Description> description = Optional.ofNullable(null);
         private Optional<Priority> priority = Optional.empty();
-        boolean priorityEdited = false;
+        private boolean priorityEdited = false;
 
         public EditClientDescriptor() {}
 
