@@ -15,14 +15,23 @@ ClientConnect is a **desktop app for managing contacts, optimized for use via a 
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
+1. Ensure you have [Java `17`](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the `.jar` file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal (How? [Windows](https://www.wikihow.com/Open-Terminal-in-Windows), [Mac](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac)) and `cd` into the folder you put the jar file in,<br>
+   ```bash
+   cd PATH\TO\FOLDER\WITH\JAR\FILE
+   ```
+   where `PATH\TO\FOLDER\WITH\JAR\FILE` is the file path of that folder.<br>
+   _(Note that by convention you should use `\` on Windows and `/` on Linux or Mac.)<br>_
+   Then use the `java -jar addressbook.jar` command to run the application.<br>
+   ```bash
+   java -jar ./addressbook.jar
+   ```
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui_v2.png)
 
@@ -32,6 +41,12 @@ ClientConnect is a **desktop app for managing contacts, optimized for use via a 
    * `list` : Lists all contacts.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+
+   * `desc 1 Sample description` : Adds a description with content `Sample description` to the 1st contact shown in the current list.
+
+   * `desc 1` : Clears the description for the 1st contact shown in the current list.
+
+   *  `expand 1` : Expand out a detailed view for the 1st contact shown in the current list.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
