@@ -6,7 +6,8 @@
 
 # ClientConnect User Guide
 
-ClientConnect is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ClientConnect is a **desktop app for providing fast access to clients’ addresses and preferences** to help salespeople in making sales decisions and building rapports with clients, which can potentially increase their sales revenue. It is also optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -104,7 +105,7 @@ help
 Let's get started with adding your very first client! To do so, all you have to type is the following command:
 
 ```
-add name/NAME phone/PHONE_NUMBER email/EMAIL address/ADDRESS [tag/TAG] [pref/preference] [freq/frequency] [priority/PRIORITY_LEVEL]
+add name/NAME phone/PHONE_NUMBER email/EMAIL address/ADDRESS [tag/TAG] [pref/PRODUCT_PREFERENCE] [freq/PRODUCT_FREQEUNCY] [priority/PRIORITY_LEVEL]
 ```
 
 <box type="tip" seamless>
@@ -122,8 +123,11 @@ Remember that only attributes in ***square brackets (i.e. []) are OPTIONAL***!
   - Are 8 digits.
   - Start with 3, 6, 8, or 9.
   - Do not have 9 as their first and second digits.
+  - Example: `91203625`
   <box type="definition" seamless>
-  We define phone numbers this way as we restrict to clients with Singaporean phone numbers.
+  
+  We define phone numbers this way to ensure data consistency and validation simplicity, the app currently restricts input to ***local Singaporean phone numbers only***. We are working on expanding support for international formats in future versions.
+
   </box>
 - Name: Only case-sensitive alphabets (a-z) and one space between each word. Note that each first letter of your name will be converted into upper-case. 
 - Address: Any input is ok (if only alphabet and number, then user can not input “#”)  
@@ -168,7 +172,7 @@ email, address, tags, and product preferences!<br>
 Just follow this format:<br>
 
 ```
-edit INDEX [name/NAME] [phone/PHONE] [email/EMAIL] [address/ADDRESS] [tag/TAG]… [pref/PRODUCT PREFERENCE] [freq/PRODUCT FREQUENCY] [priority/PRIORITY_LEVEL]​`
+edit INDEX [name/NAME] [phone/PHONE_NUMBER] [email/EMAIL] [address/ADDRESS] [tag/TAG]… [pref/PRODUCT_PREFERENCE] [freq/PRODUCT_FREQUENCY] [priority/PRIORITY_LEVEL]​`
 ```
 
 Here's how it works:
@@ -448,7 +452,7 @@ _Stay tuned!_
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add name/NAME phone/PHONE_NUMBER email/EMAIL address/ADDRESS [tag/TAG] [pref/PRRODUCT_PREFERENCE] [freq/PRODUCT_FREQUENCY]…​` <br> e.g., `add name/James Ho phone/93224444 email/jamesho@example.com address/123, Clementi Rd, 1234665 tag/friend tag/colleague pref/Shampoo freq/10`
+**Add**    | `add name/NAME phone/PHONE_NUMBER email/EMAIL address/ADDRESS [tag/TAG] [pref/PRODUCT_PREFERENCE] [freq/PRODUCT_FREQUENCY]…​` <br> e.g., `add name/James Ho phone/93224444 email/jamesho@example.com address/123, Clementi Rd, 1234665 tag/friend tag/colleague pref/Shampoo freq/10`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [name/NAME] [phone/PHONE_NUMBER] [email/EMAIL] [address/ADDRESS] [tag/TAG] [pref/PRODUCT_PREFERENCE] [freq/PRODUCT_FREQUENCY]…​`<br> e.g.,`edit 2 name/James Lee email/jameslee@example.com`
