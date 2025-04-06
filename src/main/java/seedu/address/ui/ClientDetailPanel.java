@@ -7,6 +7,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Description;
+import seedu.address.model.client.Priority;
 import seedu.address.model.client.ProductPreference;
 
 /**
@@ -24,6 +25,9 @@ public class ClientDetailPanel extends UiPart<Region> {
     @FXML private VBox productPreferenceSection;
     @FXML private Label description;
     @FXML private VBox descriptionSection;
+    @FXML private Label priority; // Add priority label
+    @FXML private VBox prioritySection;
+
 
     /**
      * Constructor that takes in a client in order to display target's details
@@ -35,6 +39,14 @@ public class ClientDetailPanel extends UiPart<Region> {
         phone.setText("Phone: " + client.getPhone().value);
         email.setText("Email: " + client.getEmail().value);
         address.setText("Address: " + client.getAddress().value);
+
+        if (client.getPriority().isPresent()) {
+            priority.setText("Priority: " + client.getPriority()
+                    .map(Priority::toString).orElse(""));
+        } else {
+            prioritySection.setVisible(false);
+            prioritySection.setManaged(false);
+        }
         if (client.getProductPreference().isPresent()) {
             productPreference.setText("Preferred Products: " + client.getProductPreference()
                     .map(ProductPreference::toString).orElse(""));

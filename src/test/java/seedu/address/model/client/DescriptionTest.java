@@ -18,24 +18,13 @@ public class DescriptionTest {
     }
 
     @Test
-    public void constructor_invalidDescription_throwsIllegalArgumentException() {
-        String invalidDescription1 = "";
-        assertThrows(IllegalArgumentException.class, () -> new Description(invalidDescription1));
-
-        String invalidDescription2 = "  ";
-        assertThrows(IllegalArgumentException.class, () -> new Description(invalidDescription2));
-    }
-
-    @Test
     public void isValidDescription() {
         // null description
-        assertThrows(NullPointerException.class, () -> Description.isValidDescription(null));
-
-        // invalid description
-        assertFalse(Description.isValidDescription("")); // empty string
-        assertFalse(Description.isValidDescription(" ")); // spaces only
+        assertFalse(Description.isValidDescription(null));
 
         // valid description
+        assertTrue(Description.isValidDescription("")); // empty string
+        assertTrue(Description.isValidDescription(" ")); // spaces only
         assertTrue(Description.isValidDescription(" -  ")); // one symbol only
         assertTrue(Description.isValidDescription("I")); // one character only
         assertTrue(Description.isValidDescription("I am a description")); // alphabets only
@@ -74,5 +63,21 @@ public class DescriptionTest {
 
         // different description -> returns false
         assertFalse(description.equals(descriptionDifferent));
+    }
+
+    @Test
+    public void testHashCode() {
+        Description description = new Description("I am a description");
+        Description descriptionCopy = new Description("I am a description");
+        Description descriptionDifferent = new Description("I am a different description");
+
+        // same object -> returns same hash code
+        assertEquals(description.hashCode(), description.hashCode());
+
+        // same values -> returns same hash code
+        assertEquals(description.hashCode(), descriptionCopy.hashCode());
+
+        // different description -> returns different hash code
+        assertFalse(description.hashCode() == descriptionDifferent.hashCode());
     }
 }

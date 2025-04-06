@@ -66,7 +66,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_FREQUENCY).isPresent()
                 && !argMultimap.getValue(PREFIX_PREFERENCE).isPresent()) {
-            throw new ParseException(EditCommand.MESSAGE_FREQUENCY_NOT_ALLOWED);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditCommand.MESSAGE_FREQUENCY_NOT_ALLOWED));
         }
 
         Optional<Frequency> frequency = ParserUtil.parseFrequency(argMultimap.getValue(PREFIX_FREQUENCY));

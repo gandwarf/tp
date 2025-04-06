@@ -28,8 +28,9 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
+        String capitalizedName = capitalizeFirstLetters(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        fullName = capitalizedName;
     }
 
     /**
@@ -37,6 +38,29 @@ public class Name {
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Converts every first letter of each word in the name to its capital form.
+     * e.g. john doe -> John Doe
+     *
+     * @param name The client's name
+     * @return The capitalized client name
+     */
+    public static String capitalizeFirstLetters(String name) {
+        requireNonNull(name);
+        if (name.trim().isEmpty()) {
+            return "";
+        }
+
+        String[] splitNameByWhiteSpace = name.split("\\s+");
+        StringBuilder capitalizedNameBuilder = new StringBuilder();
+        for (String word : splitNameByWhiteSpace) {
+            capitalizedNameBuilder.append(Character.toUpperCase(word.charAt(0)))
+                    .append(word, 1, word.length())
+                    .append(" ");
+        }
+        return capitalizedNameBuilder.toString().trim();
     }
 
 

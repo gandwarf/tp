@@ -12,7 +12,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.BOB;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.ClientBuilder;
@@ -26,7 +25,6 @@ public class ClientTest {
     }
 
     @Test
-    @Disabled
     public void isSameClient() {
         // same object -> returns true
         assertTrue(ALICE.isSameClient(ALICE));
@@ -49,7 +47,6 @@ public class ClientTest {
     }
 
     @Test
-    @Disabled
     public void equals() {
         // same values -> returns true
         Client aliceCopy = new ClientBuilder(ALICE).build();
@@ -116,5 +113,93 @@ public class ClientTest {
                 + ", description=" + client2.getDescription().get()
                 + ", priority=" + "}";
         assertEquals(expected, client2.toString());
+    }
+
+    @Test
+    void isSameClientSameObjectReturnsTrue() {
+        assertTrue(ALICE.isSameClient(ALICE));
+    }
+
+    @Test
+    void isSameClientNullReturnsFalse() {
+        assertFalse(ALICE.isSameClient(null));
+    }
+
+    @Test
+    void isSameClientSameNameDifferentAttributesReturnsFalse() {
+        Client editedAlice = new ClientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALICE.isSameClient(editedAlice));
+    }
+
+    @Test
+    void isSameClientDifferentNameSameAttributesReturnsFalse() {
+        Client editedAlice = new ClientBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertFalse(ALICE.isSameClient(editedAlice));
+    }
+
+    @Test
+    void isSameClientNameDiffersInCaseReturnsTrue() {
+        Client editedBob = new ClientBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        assertTrue(BOB.isSameClient(editedBob));
+    }
+    @Test
+    void equalsDifferentProductPreferenceReturnsFalse() {
+        Client editedAlice = new ClientBuilder(ALICE).withProductPreference("Conditioner").build();
+        assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    void equalsDifferentDescriptionReturnsFalse() {
+        Client editedAlice = new ClientBuilder(ALICE).withDescription("Loves conditioner.").build();
+        assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    void equalsDifferentPriorityReturnsFalse() {
+        Client editedAlice = new ClientBuilder(ALICE).withPriority(1).build();
+        assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    void equalsSameProductPreferenceReturnsTrue() {
+        Client editedAlice = new ClientBuilder(ALICE).withProductPreference("shampoo").build();
+        assertTrue(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    void equalsSameDescriptionReturnsTrue() {
+        Client editedAlice = new ClientBuilder(ALICE).withDescription("Loves shampoo.").build();
+        assertTrue(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    void equalsSamePriorityReturnsTrue() {
+        Client editedAlice = new ClientBuilder(ALICE).withPriority(3).build();
+        assertTrue(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    void isSameClientDifferentPhoneReturnsFalse() {
+        Client editedAlice = new ClientBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(ALICE.isSameClient(editedAlice));
+    }
+
+    @Test
+    void isSameClientDifferentEmailReturnsFalse() {
+        Client editedAlice = new ClientBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(ALICE.isSameClient(editedAlice));
+    }
+
+    @Test
+    void isSameClientDifferentAddressReturnsFalse() {
+        Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        assertFalse(ALICE.isSameClient(editedAlice));
+    }
+
+    @Test
+    void isSameClientSameNamePhoneEmailAddressReturnsTrue() {
+        Client editedAlice = new ClientBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(ALICE.isSameClient(editedAlice));
     }
 }

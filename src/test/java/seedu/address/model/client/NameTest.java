@@ -1,5 +1,6 @@
 package seedu.address.model.client;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -39,6 +40,27 @@ public class NameTest {
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+    }
+
+    @Test
+    public void capitalizeFirstLetters() {
+        // null name
+        assertThrows(NullPointerException.class, () -> Name.capitalizeFirstLetters(null));
+
+        // invalid name
+        assertEquals("", Name.capitalizeFirstLetters(""));
+        assertEquals("", Name.capitalizeFirstLetters("   "));
+        assertEquals("^", Name.capitalizeFirstLetters("^"));
+        assertEquals("Peter*", Name.capitalizeFirstLetters("peter*"));
+        assertEquals("Peter John", Name.capitalizeFirstLetters("peter   john"));
+
+        // valid name
+        assertEquals("Peter John May", Name.capitalizeFirstLetters("peter john may"));
+        assertEquals("Peter John May", Name.capitalizeFirstLetters("Peter john May"));
+        assertEquals("12345", Name.capitalizeFirstLetters("12345")); // numbers only
+        assertEquals("Peter The 2nd", Name.capitalizeFirstLetters("peter the 2nd")); // alphanumeric characters
+        assertEquals("David Roger Jackson Ray Jr 2nd",
+                Name.capitalizeFirstLetters("david roger jackson ray jr 2nd")); // long names
     }
 
     @Test
