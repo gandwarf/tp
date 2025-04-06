@@ -96,7 +96,7 @@ Format: `add name/NAME phone/PHONE_NUMBER email/EMAIL address/ADDRESS [tag/TAG] 
 - A client can have any number of tags (including 0)  
 - When there is a preference then there should be a frequency. If not, then frequency will be 0 by default. While preference is also optional like tag.  
 - Phone: Only number digits (0-9) of length 8 without spaces  
-- Name: Only case-sensitive alphabets (a-z) and one space between each word  
+- Name: Only case-sensitive alphabets (a-z) and one space between each word. The length should smaller than 40 characters
 - Address: Any input is ok (if only alphabet and number, then user can not input “#”)  
 </box>
 
