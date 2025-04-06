@@ -417,7 +417,14 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ClientConnect data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<box type="info" seamless>
+
+**Note:**
+If you are launching ClientConnect ***for the first time***, a **sample address book with a few entries** will be autoloaded for you. The JSON file under `data/addressbook.json` will **only be created when you make modifications** to the autoloaded entries via the application.
+
+</box>
 
 <box type="warning" seamless>
 
