@@ -104,13 +104,14 @@ help
 Let's get started with adding your very first client! To do so, all you have to type is the following command:
 
 ```
-add name/NAME phone/PHONE_NUMBER email/EMAIL address/ADDRESS [tag/TAG] [pref/preference] [freq/frequency]
+add name/NAME phone/PHONE_NUMBER email/EMAIL address/ADDRESS [tag/TAG] [pref/preference] [freq/frequency] [priority/PRIORITY_LEVEL]
 ```
 
 <box type="tip" seamless>
 
 - A client can have any number of tags (including 0).
-- When there is a preference then there should be a frequency. If not, then frequency will be 0 by default. While preference is also optional like tag.  
+- When there is a preference then there should be a frequency. If not, then frequency will be 0 by default. While preference is also optional like tag.
+- Priority is another optional field which takes only one of the 3 values: 1, 2 or 3 where 3 being the highest - VIP - and 1 being the lowest - STANDARD  
 - Phone: Only valid if they
   - Are 8 digits.
   - Start with 3, 6, 8, or 9.
@@ -148,7 +149,7 @@ email, address, tags, and product preferences!<br>
 Just follow this format:<br>
 
 ```
-edit INDEX [name/NAME] [phone/PHONE] [email/EMAIL] [address/ADDRESS] [tag/TAG] [pref/PRODUCT PREFERENCE] [freq/PRODUCT FREQUENCY]…​`
+edit INDEX [name/NAME] [phone/PHONE] [email/EMAIL] [address/ADDRESS] [tag/TAG]… [pref/PRODUCT PREFERENCE] [freq/PRODUCT FREQUENCY] [][priority/PRIORITY_LEVEL]​`
 ```
 
 Here's how it works:
@@ -297,8 +298,43 @@ The INDEX must be a **positive integer**, e.g. 1, 2, 3, …​
 
 Examples:
 * After running the `list` command, typing `expand 2` will show more details for the second client.
-* If you search with `find Joe`, then typing `expand 1` will display the details for the first client in your search results.<br>
+* If you search with `find Alex`, then typing `expand 1` will display the details for the first client in your search results.<br>
 ![result for 'expand 1'](images/ExpandCommandUi.png)<br>
+
+### Filtering clients : `filter`
+
+Need to narrow down your client list based on specific criteria? The `filter` command allows you to refine the currently displayed list by either Priority Level or Product Preference.
+
+**Format:**
+
+* Filter by Priority Level:
+    ```
+    filter priority/PRIORITY_LEVEL
+    ```
+* Filter by Product Preference:
+    ```
+    filter pref/PRODUCT_PREFERENCE
+    ```
+
+**How it works:**
+
+* The command filters the list of clients currently shown on the screen.
+* **Priority Level:** Replace `PRIORITY_LEVEL` with `1`, `2`, or `3`. Only clients matching the specified priority level will be shown.
+* **Product Preference:** Replace `PRODUCT_PREFERENCE` with the name of the product preference you want to filter by. The search is case-insensitive.
+* **Important Constraints:**
+    * You can only use **one** filter type (`priority/` or `pref/`) per command.
+    * The value provided for the filter (`PRIORITY_LEVEL` or `PRODUCT_PREFERENCE`) **cannot be empty**.
+
+**Examples:**
+
+* `filter priority/1` : Shows only the clients from the current list who have a priority level of 1.
+* `filter pref/shampoo` : Shows only the clients from the current list who have "shampoo" in their product preference.
+
+**(Example Scenario)**
+
+1.  You run `list` to see all clients.
+2.  You then run `filter priority/2` to see only the clients with priority level 2.
+3.  If you then run `filter pref/Conditioner`, it will filter the list *currently showing* (only priority 2 clients) to find those who also prefer "Conditioner". If you wanted to see *all* clients preferring "Conditioner", you would run `list` again before `filter pref/Conditioner`.
 
 ### Ranking clients : `rank`
 
@@ -399,6 +435,7 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [name/NAME] [phone/PHONE_NUMBER] [email/EMAIL] [address/ADDRESS] [tag/TAG] [pref/PRODUCT_PREFERENCE] [freq/PRODUCT_FREQUENCY]…​`<br> e.g.,`edit 2 name/James Lee email/jameslee@example.com`
 **Describe** | `desc 1 This is Alex :)` `desc 2`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`, `find friends`, `find shampoo`
+**Filter** | `filter priority/PRIORITY_LEVEL` or `filter pref/PRODUCT_PREFERENCE` <br> e.g., `filter priority/2`, `filter pref/shampoo`
 **List**   | `list`
 **Help**   | `help`
 **Rank**   | `rank KEYWORD` <br> e.g., `rank total` `rank name`
