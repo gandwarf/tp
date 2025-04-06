@@ -446,6 +446,12 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
+<box type="tip" seamless>
+
+ClientConnect will **autoload a sample address book with a few entries** to play around with ***if there isn't one being created yet***. So you may ***perform these test cases even without adding new entries***.
+
+</box>
+
 ### Launch and shutdown
 
 1. Initial launch
