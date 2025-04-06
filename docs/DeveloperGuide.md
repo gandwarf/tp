@@ -464,8 +464,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a client
 
 1. Deleting a client while all clients are being shown
@@ -481,15 +479,40 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Filtering a client's product preference or priority
 
-### Saving data
+1. Filtering a client while all clients are being shown.
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
-1. Dealing with missing/corrupted data files
+    1. Test case: `filter pref/shampoo`
+       Expected: All clients with `shampoo` as part of their product preference are shown.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Test case: `filter priority/2`
+       Expected: All clients with the `PREMIUM` priority are shown.
 
-1. _{ more test cases …​ }_
+    1. Test case: `filter name/John`
+       Expected: Error details shown in the status message.
+
+    1. Other incorrect filter command keywords to try: `filter`, `filter address/`, `...` (where keyword is invalid)
+       Expected: Similar to previous.
+
+### Ranking the clients
+
+1. Ranking with all the clients being shown.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+   1. Test case: `rank name`
+      Expected: All clients are sorted based on their names in lexicographical order.
+   
+    1. Test case: `rank total`
+      Expected: All clients are sorted based on their total purchase in descending order.
+
+   1. Other correct rank command keywords to try: `rank toTal`, `rank NAME`
+      Expected: Similar to previous.
+
+   1. Test case: `rank handsomeness`
+      Expected: Current clients' order does not change. Error details shown in the status message.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
